@@ -12,4 +12,5 @@
     <color name="divide_line">#e7e7e7</color>
     <color name="loan_normal">#BCA050</color>
     <color name="loan_name">#0b0a0a</color>
+    <color name="loan_filter">#222121</color>
 </resources>

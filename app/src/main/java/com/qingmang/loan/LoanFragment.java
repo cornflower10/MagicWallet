@@ -1,6 +1,7 @@
 package com.qingmang.loan;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,6 +28,8 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
     @BindView(R.id.srf_loan)
     SmartRefreshLayout srfLoan;
     Unbinder unbinder;
+    @BindView(R.id.tb_loan)
+    TabLayout tbLoan;
 
     private LoanAdapter loanAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -50,9 +53,53 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
 
     @Override
     protected void initView() {
+        initTab();
         initRefresh();
 
-        getData(1, 20, null);
+        getData(1, 20, null, false);
+    }
+
+    /**
+     * 初始化Tab
+     */
+    private void initTab() {
+        tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_default_sorting));
+        tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_lowest_rate));
+        tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_highest_quota));
+        tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_filter));
+
+        tbLoan.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        getData(1, 20, null, false);
+                        break;
+                    case 1:
+                        getData(1, 20, "rate", false);
+                        break;
+                    case 2:
+                        getData(1, 20, "loan", false);
+                        break;
+                    case 3:
+                        getData(1, 20, null, false);
+                        break;
+                    default:
+                        getData(1, 20, null, false);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     /**
@@ -62,14 +109,14 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         srfLoan.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                getData(1, 20, null);
+                getData(1, 20, null, false);
                 srfLoan.finishRefresh(2000, true);
             }
         });
         srfLoan.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                getData(2, 20, null);
+                getData(1, 20, null, true);
                 srfLoan.finishLoadmore(2000, true);
             }
         });
@@ -84,11 +131,16 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
     }
 
     @Override
+    public void onLoadMore(LoanListEntity loanListEntity) {
+        loanAdapter.addData(loanListEntity.getContent());
+    }
+
+    @Override
     public void onError(String msg) {
         loadViewHelper.showError(msg, getResources().getString(R.string.click_reload), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(1, 20, null);
+                getData(1, 20, null, false);
             }
         });
     }
@@ -100,8 +152,8 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
      * @param pageSize
      * @param orderCond
      */
-    private void getData(int pageNumber, int pageSize, String orderCond) {
-        mPresenter.loadData(pageNumber, pageSize, orderCond);
+    private void getData(int pageNumber, int pageSize, String orderCond, boolean isLoadMore) {
+        mPresenter.loadData(pageNumber, pageSize, orderCond, isLoadMore);
     }
 
     public static LoanFragment newInstance() {
@@ -118,5 +170,4 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         super.onDestroyView();
         unbinder.unbind();
     }
-
 }

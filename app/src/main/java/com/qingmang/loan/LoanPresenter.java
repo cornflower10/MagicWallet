@@ -15,14 +15,23 @@ import io.reactivex.functions.Consumer;
  * on 2018/4/10 11:15
  */
 public class LoanPresenter extends BaseMvpPresenter<LoanView> {
-    void loadData(int pageNumber, int pageSize, String orderCond) {
+    void loadData(int pageNumber, int pageSize, String orderCond, final boolean isLoadMore) {
         addSubscribe(App.getInstance().getRetrofitServiceManager().create(LoanApiService.class).getLoanList(pageNumber, pageSize, orderCond)
                 .compose(ResponseTransformer.<LoanListEntity>handleResult())
                 .compose(RxSchedulers.<LoanListEntity>ObToMain())
                 .subscribe(new Consumer<LoanListEntity>() {
                     @Override
                     public void accept(LoanListEntity loanListEntity) throws Exception {
-                        getMvpView().onDataSuccess(loanListEntity);
+                        for (int i = 0; i < 17; i++
+                                ) {
+                            loanListEntity.getContent().add(loanListEntity.getContent().get(1));
+                        }
+                        if (isLoadMore) {
+                            getMvpView().onLoadMore(loanListEntity);
+                        } else {
+                            getMvpView().onDataSuccess(loanListEntity);
+                        }
+
                     }
                 }, new Consumer<Throwable>() {
                     @Override
