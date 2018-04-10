@@ -71,4 +71,5 @@ public class App extends Application {
     public RetrofitServiceManager getRetrofitServiceManager() {
         return retrofitServiceManager;
     }
+
 }

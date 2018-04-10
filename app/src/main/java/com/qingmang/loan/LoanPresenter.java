@@ -1,8 +1,7 @@
 package com.qingmang.loan;
 
-import android.util.Log;
-
 import com.qingmang.App;
+import com.qingmang.R;
 import com.qingmang.api.LoanApiService;
 import com.qingmang.base.BaseMvpPresenter;
 import com.qingmang.loan.entity.LoanListEntity;
@@ -23,12 +22,12 @@ public class LoanPresenter extends BaseMvpPresenter<LoanView> {
                 .subscribe(new Consumer<LoanListEntity>() {
                     @Override
                     public void accept(LoanListEntity loanListEntity) throws Exception {
-                        Log.e("GG", "GG");
+                        getMvpView().onDataSuccess(loanListEntity);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e("GG", "GG");
+                        getMvpView().onError(App.getInstance().getResources().getString(R.string.fail_message));
                     }
                 }));
     }

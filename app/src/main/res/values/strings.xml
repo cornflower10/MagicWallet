@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">魔法钱包</string>
+    <string name="fail_message">获取数据异常</string>
+    <string name="loan_hot">热</string>
+    <string name="loan_name">名称</string>
+    <string name="loan_nature1">放贷快</string>
+    <string name="loan_nature2">额度不限</string>
+    <string name="loan_low_cost">最低费率</string>
+    <string name="loan_low_cost_value">0.1%</string>
+    <string name="loan_man_amount">541700人</string>
+    <string name="loan_man_amount_apply">已申请</string>
+    <string name="loan_highest">最高额</string>
+    <string name="loan_highest_value">20.0</string>
+    <string name="loan_highest_value_unit">万</string>
+    <string name="click_reload">点击重新加载</string>
 </resources>
