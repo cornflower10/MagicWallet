@@ -10,8 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.qingmang.App;
+import com.qingmang.R;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.uilibrary.loadview.LoadViewHelper;
+import com.qingmang.user.LoginActivity;
 
 import butterknife.ButterKnife;
 
@@ -51,8 +54,18 @@ public abstract class BaseMvpActivity<P extends Presenter<V>,V extends BaseView>
 
     @Override
     public void onError(String msg) {
-        showToast(msg);
+        stopProgressDialog();
+        jumpLoign( msg);
+    }
 
+    public void jumpLoign(String msg){
+
+        if("-99".equals(msg)){
+            App.getInstance().clearCache();
+            startActivity(LoginActivity.class);
+        }else {
+            showToast(msg);
+        }
     }
 
     private void initToolar() {

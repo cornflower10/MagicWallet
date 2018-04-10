@@ -2,6 +2,7 @@ package com.qingmang;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.qingmang.baselibrary.utils.AppUtils;
 import com.qingmang.baselibrary.utils.ForegroundCallbacks;
@@ -29,6 +30,21 @@ public class App extends Application {
     // Returns the application instance
     public static App getInstance() {
         return singleton;
+    }
+
+    private String token ;
+    private boolean isLogin;
+
+    public String getToken() {
+        return getSharedPreferences("token",MODE_PRIVATE).getString("token","");
+    }
+
+    public void clearCache() {
+        getSharedPreferences("token",MODE_PRIVATE).edit().clear();
+    }
+
+    public boolean isLogin() {
+        return !TextUtils.isEmpty(getToken());
     }
 
     public ForegroundCallbacks getForegroundCallbacks() {
