@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.qingmang.R;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.uilibrary.loadview.LoadViewHelper;
 
@@ -62,7 +61,7 @@ public abstract class BaseMvpActivity<P extends Presenter<V>,V extends BaseView>
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("");
             if(showBack){
-//                toolbar.setNavigationIcon(R.drawable.icon_back);
+                toolbar.setNavigationIcon(R.drawable.icon_back);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
             TextView textView = (TextView) findViewById(R.id.title_name);

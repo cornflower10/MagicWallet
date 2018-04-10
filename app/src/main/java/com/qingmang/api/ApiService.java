@@ -2,7 +2,6 @@ package com.qingmang.api;
 
 
 import com.qingmang.moudle.entity.BaseEntity;
-import com.qingmang.moudle.entity.LoginEntity;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -17,28 +16,35 @@ public interface ApiService {
 
     /**
      * 注册
-     * @param userName
-     * @param type
-     * @param sign
-     * @return
+     *
      */
     @FormUrlEncoded
-    @POST("regist.php")
-    Observable<BaseEntity> getSms(@Field("mobile") String userName,
-                                 @Field("mobileCodeType") String type,
-                                 @Field("sign") String sign);
+    @POST("member/regist")
+    Observable<BaseEntity<String>> Regist(@Field("phone") String phone,
+                                 @Field("code") String code,
+                                  @Field("phoneModel") String phoneModel,
+                                  @Field("pwd") String pwd);
 
     /**
      * 登录
-     * @param userName
-     * @param passWd
+     */
+    @FormUrlEncoded
+    @POST("member/login")
+    Observable<BaseEntity<String>> Login(@Field("phone") String phone,
+                                              @Field("pwd") String passWd
+                                              );
+
+    /**
+     * 注册短信验证码
      * @return
      */
     @FormUrlEncoded
-    @POST("regist.php")
-    Observable<BaseEntity<LoginEntity>> login(@Field("phone") String userName,
-                                              @Field("password") String passWd
-                                              );
+    @POST("regist/sms")
+    Observable<BaseEntity<String>> RegistSMS(@Field("phone") String phone,
+                                                     @Field("idCard") String idCard
+    );
+
+
 //
 //
 //
