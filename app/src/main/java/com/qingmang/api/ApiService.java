@@ -2,10 +2,12 @@ package com.qingmang.api;
 
 
 import com.qingmang.moudle.entity.BaseEntity;
+import com.qingmang.moudle.entity.CustomerInfo;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -45,6 +47,8 @@ public interface ApiService {
     );
 
 
+    @GET("member/info")
+    Observable<BaseEntity<CustomerInfo>> CusomerInfo();
 //
 //
 //
