@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import com.qingmang.home.FindFragment;
 import com.qingmang.home.HomeFragment;
 import com.qingmang.home.MyFragment;
+import com.qingmang.loan.LoanFragment;
 import com.qingmang.uilibrary.BottomBar;
 import com.qingmang.uilibrary.BottomBarTab;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     BottomBar mBottomBar;
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private HomeFragment homeFragment;
+    private LoanFragment loanFragment;
     private MyFragment myFragment;
     private FindFragment findFragment;
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
         mBottomBar.addItem(new BottomBarTab(this, R.mipmap.index))
+                .addItem(new BottomBarTab(this, R.drawable.icon_tab_loan))
                 .addItem(new BottomBarTab(this, R.mipmap.find))
                 .addItem(new BottomBarTab(this, R.mipmap.my));
 
@@ -52,30 +55,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(int position, int prePosition) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-               switch (position){
-                   case 0:
-                       if(null==homeFragment){
-                           homeFragment = HomeFragment.newInstance();
-                           transaction.add(R.id.fl_container,homeFragment);
-                       }
-                           showHideFragment(homeFragment);
-                       break;
-                   case 1:
-                       if(null==findFragment){
-                           findFragment = FindFragment.newInstance();
-                           transaction.add(R.id.fl_container,findFragment);
-                       }
-                       showHideFragment(findFragment);
-                       break;
-                   case 2:
-                       if(null==myFragment){
-                           myFragment = MyFragment.newInstance();
-                           transaction.add(R.id.fl_container,myFragment);
-                       }
-                       showHideFragment(myFragment);
-                       break;
+                switch (position) {
+                    case 0:
+                        if (null == homeFragment) {
+                            homeFragment = HomeFragment.newInstance();
+                            transaction.add(R.id.fl_container, homeFragment);
+                        }
+                        showHideFragment(homeFragment);
+                        break;
+                    case 1:
+                        if (null == loanFragment) {
+                            loanFragment = LoanFragment.newInstance();
+                            transaction.add(R.id.fl_container, loanFragment);
+                        }
+                        showHideFragment(loanFragment);
+                        break;
+                    case 2:
+                        if (null == findFragment) {
+                            findFragment = FindFragment.newInstance();
+                            transaction.add(R.id.fl_container, findFragment);
+                        }
+                        showHideFragment(findFragment);
+                        break;
+                    case 3:
+                        if (null == myFragment) {
+                            myFragment = MyFragment.newInstance();
+                            transaction.add(R.id.fl_container, myFragment);
+                        }
+                        showHideFragment(myFragment);
+                        break;
 
-               }
+                }
                 transaction.commit();
 
             }
@@ -117,18 +127,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         android.app.FragmentManager manager = getFragmentManager();
-        if (null!=homeFragment&&homeFragment.isAdded()) {
+        if (null != homeFragment && homeFragment.isAdded()) {
             manager.putFragment(outState, "homeFragment", homeFragment);
         }
-        if (null!=myFragment&&myFragment.isAdded()) {
+        if (null != loanFragment && loanFragment.isAdded()) {
+            manager.putFragment(outState, "loanFragment", loanFragment);
+        }
+        if (null != myFragment && myFragment.isAdded()) {
             manager.putFragment(outState, "myFragment", myFragment);
         }
-        if (null!=findFragment&&findFragment.isAdded()) {
+        if (null != findFragment && findFragment.isAdded()) {
             manager.putFragment(outState, "findFragment", findFragment);
         }
 
@@ -144,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
 
             homeFragment = (HomeFragment) getFragmentManager().getFragment(savedInstanceState, "homeFragment");
+            loanFragment = (LoanFragment) getFragmentManager().getFragment(savedInstanceState, "loanFragment");
             myFragment = (MyFragment) getFragmentManager().getFragment(savedInstanceState, "myFragment");
             findFragment = (FindFragment) getFragmentManager().getFragment(savedInstanceState, "findFragment");
 
@@ -152,36 +165,43 @@ public class MainActivity extends AppCompatActivity {
 //            myFragment = MyFragment.newInstance();
 //            findFragment = FindFragment.newInstance();
         }
-        if(null!=homeFragment)
-        mFragments.add(homeFragment);
-        if(null!=findFragment)
-        mFragments.add(findFragment);
-        if(null!=myFragment)
-        mFragments.add(myFragment);
+        if (null != homeFragment)
+            mFragments.add(homeFragment);
+        if (null != loanFragment)
+            mFragments.add(loanFragment);
+        if (null != findFragment)
+            mFragments.add(findFragment);
+        if (null != myFragment)
+            mFragments.add(myFragment);
 
-        if(null!=homeFragment)
-        transaction.add(R.id.fl_container,homeFragment);
-        if(null!=findFragment)
-        transaction.add(R.id.fl_container,findFragment);
-        if(null!=myFragment)
-        transaction.add(R.id.fl_container,myFragment);
+        if (null != homeFragment)
+            transaction.add(R.id.fl_container, homeFragment);
+        if (null != loanFragment)
+            transaction.add(R.id.fl_container, loanFragment);
+        if (null != findFragment)
+            transaction.add(R.id.fl_container, findFragment);
+        if (null != myFragment)
+            transaction.add(R.id.fl_container, myFragment);
 
-        if(null!=myFragment)
-        transaction.hide(myFragment);
-        if(null!=findFragment)
-        transaction.hide(findFragment);
+        if (null != loanFragment)
+            transaction.hide(loanFragment);
+        if (null != myFragment)
+            transaction.hide(myFragment);
+        if (null != findFragment)
+            transaction.hide(findFragment);
         transaction.commit();
     }
-    public void showHideFragment(Fragment fragment){
-       FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-        if(!mFragments.contains(fragment)){
+    public void showHideFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        if (!mFragments.contains(fragment)) {
             mFragments.add(fragment);
         }
-        for (Fragment f:mFragments) {
-            if(fragment.equals(f)){
+        for (Fragment f : mFragments) {
+            if (fragment.equals(f)) {
                 fragmentTransaction.show(fragment);
-            }else
+            } else
                 fragmentTransaction.hide(f);
 
         }
