@@ -37,7 +37,7 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
     public void register(String phone,String idCard,String code,String phoneModel,String pwd){
         addSubscribe(App.getInstance()
                 .getRetrofitServiceManager()
-                .create(ApiService.class).Regist(phone,idCard,code,phoneModel,pwd)
+                .create(ApiService.class).Regist(phone,code,phoneModel,pwd)
                 .compose(ResponseTransformer.<String>handleResult())
                 .compose(RxSchedulers.<String>ObToMain())
                 .subscribe(new Consumer<String>() {
