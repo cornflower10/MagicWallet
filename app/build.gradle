@@ -31,11 +31,13 @@ android {
 
     productFlavors {
         develop {
-            buildConfigField 'String', 'URL', '"http://47.74.133.184/SERVER_PROJECT/"'
+            buildConfigField 'String', 'URL', '"http://120.26.120.100:8181/"'
             buildConfigField 'String', 'WHITELIST', '"dev"'
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "test", APP_ICON: "@drawable/logo_test", APP_LABEL: "@string/app_name_test"]
         }
-        product {}
+        product {
+            buildConfigField 'String', 'URL', '"https://sup.haiyunx.com/"'
+        }
 
     }
 
