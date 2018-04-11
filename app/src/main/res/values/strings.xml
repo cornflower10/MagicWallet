@@ -18,4 +18,20 @@
     <string name="loan_lowest_rate">利率最低</string>
     <string name="loan_highest_quota">最高额度</string>
     <string name="loan_filter">筛选</string>
+    <string name="loan_detail_introduct">百度官方自营现金贷</string>
+    <string name="loan_detail_Limit_range">额度范围</string>
+    <string name="loan_detail_term_range">期限范围</string>
+    <string name="loan_detail_range_value">1.50</string>
+    <string name="loan_detail_range_value_unit">%</string>
+    <string name="loan_detail_range_reference">参考月利率</string>
+    <string name="loan_detail_repayment_value">987</string>
+    <string name="loan_detail_repayment_value_unit">元</string>
+    <string name="loan_detail_repayment_month">每月还款（元）</string>
+    <string name="loan_detail_lending_time_unit">秒</string>
+    <string name="loan_detail_lending_time">10</string>
+    <string name="loan_detail_lending_time_fastest">最快放款时间</string>
+    <string name="loan_detail_apply_process">申请流程</string>
+    <string name="loan_detail_apply_condition">申请条件</string>
+    <string name="loan_detail_apply_lending">申请放款</string>
+    <string name="loan_detail_lending_month_unit">月</string>
 </resources>
