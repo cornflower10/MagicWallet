@@ -1,11 +1,13 @@
 package com.qingmang.loan;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.qingmang.App;
 import com.qingmang.R;
 import com.qingmang.loan.entity.LoanListContent;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
@@ -19,12 +21,6 @@ import java.util.List;
 public class LoanAdapter extends BaseQuickAdapter<LoanListContent, BaseViewHolder> {
     public LoanAdapter(int layoutResId, @Nullable List<LoanListContent> data) {
         super(layoutResId, data);
-        setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-            }
-        });
     }
 
     @Override

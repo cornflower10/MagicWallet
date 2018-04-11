@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.loan.entity.LoanListEntity;
@@ -128,6 +129,13 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         loanAdapter = new LoanAdapter(R.layout.item_loan, loanListEntity.getContent());
         rvLoan.setAdapter(loanAdapter);
         rvLoan.setLayoutManager(linearLayoutManager);
+
+        loanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(LoanDetailActivity.class);
+            }
+        });
     }
 
     @Override

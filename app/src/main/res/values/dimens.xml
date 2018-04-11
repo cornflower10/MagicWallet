@@ -14,6 +14,10 @@
     <dimen name="loan_name">18sp</dimen>
     <dimen name="loan_name_big">20sp</dimen>
     <dimen name="loan_default_padding">5dp</dimen>
-    <dimen name="loan_icon_normal">40dp</dimen>
+    <dimen name="loan_icon_normal">60dp</dimen>
     <dimen name="loan_nature">12sp</dimen>
+    <dimen name="loan_default_padding_big">10dp</dimen>
+    <dimen name="loan_icon_normal_tip">15dp</dimen>
+    <dimen name="loan_default_margin_big">40dp</dimen>
+    <dimen name="loan_detail_tip">12sp</dimen>
 </resources>
