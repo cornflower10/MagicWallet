@@ -49,6 +49,30 @@ public interface ApiService {
 
     @GET("member/info")
     Observable<BaseEntity<CustomerInfo>> CusomerInfo();
+
+
+
+    /**
+     * 修改短信验证码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/update/sms")
+    Observable<BaseEntity<String>> UpdatePasswdSms(@Field("phone") String phone
+    );
+
+    /**
+     * 修改短信验证码
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/update/pwd")
+    Observable<BaseEntity<String>> UpdatePasswd(@Field("phone") String phone,
+                                                   @Field("pwd") String pwd,
+                                                   @Field("code") String code
+    );
+
+
 //
 //
 //
