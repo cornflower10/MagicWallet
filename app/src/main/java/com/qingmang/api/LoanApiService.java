@@ -1,5 +1,6 @@
 package com.qingmang.api;
 
+import com.qingmang.loan.entity.LoanDetailEntity;
 import com.qingmang.loan.entity.LoanListEntity;
 import com.qingmang.moudle.entity.BaseEntity;
 
@@ -14,6 +15,8 @@ import retrofit2.http.POST;
  */
 public interface LoanApiService {
     /**
+     * 列表
+     *
      * @param pageNumber
      * @param pageSize
      * @param orderCond
@@ -24,4 +27,14 @@ public interface LoanApiService {
     Observable<BaseEntity<LoanListEntity>> getLoanList(@Field("pageNumber") int pageNumber,
                                                        @Field("pageSize") int pageSize,
                                                        @Field("orderCond") String orderCond);
+
+    /**
+     * 详情
+     *
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("open/plat/info")
+    Observable<BaseEntity<LoanDetailEntity>> getLoanDetail(@Field("id") int id);
 }

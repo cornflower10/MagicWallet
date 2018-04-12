@@ -2,8 +2,10 @@ package com.qingmang.loan;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,11 @@ import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.loan.entity.LoanDetailEntity;
+import com.qingmang.utils.imageload.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -76,6 +83,12 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     @BindView(R.id.tv_loan_detail_apply_lending)
     TextView tvLoanDetailApplyLending;
 
+    private LoanDetailCondsAdapter loanDetailCondsAdapter;
+    private LoanDetailProcessAdapter loanDetailProcessAdapter;
+    private LinearLayoutManager linearLayoutManagerCons;
+    private LinearLayoutManager linearLayoutManagerProcess;
+    private List<String> cons = new ArrayList<>();
+
     @Override
     public String setTitleName() {
         return "贷款详情";
@@ -94,6 +107,34 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     @Override
     public void onSuccess(LoanDetailEntity loanDetailEntity) {
 
+        initAdapter(loanDetailEntity);
+
+        tvLoanDetailName.setText(loanDetailEntity.getName());
+        ImageLoaderUtil.getInstance().showImage(loanDetailEntity.getLogo(), ivLoanDetailIcon, R.mipmap.ic_launcher_round);
+        tvDetailHighestValue.setText(loanDetailEntity.getLoanUpper() / 10000 + "");
+        if (TextUtils.isEmpty(loanDetailEntity.getNumber())) {
+            tvManDetailAmountApply.setText("0");
+        } else {
+            tvManDetailAmountApply.setText(loanDetailEntity.getNumber());
+        }
+
+    }
+
+    private void initAdapter(LoanDetailEntity loanDetailEntity) {
+        cons.clear();
+        cons = Arrays.asList(loanDetailEntity.getConds().split(","));
+        loanDetailCondsAdapter = new LoanDetailCondsAdapter(R.layout.item_loan_detail_cons, cons);
+        linearLayoutManagerCons = new LinearLayoutManager(this);
+
+        loanDetailProcessAdapter = new LoanDetailProcessAdapter(R.layout.item_loan_detail_process, loanDetailEntity.getProsList());
+        linearLayoutManagerProcess = new LinearLayoutManager(this);
+        linearLayoutManagerProcess.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        rvLoanDetailApplyCondition.setLayoutManager(linearLayoutManagerCons);
+        rvLoanDetailApplyCondition.setAdapter(loanDetailCondsAdapter);
+
+        rvLoanDetailApplyProcess.setLayoutManager(linearLayoutManagerProcess);
+        rvLoanDetailApplyProcess.setAdapter(loanDetailProcessAdapter);
     }
 
     @Override
@@ -104,5 +145,11 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
                 return new LoanDetailPresenter();
             }
         });
+    }
+
+    @Override
+    public void onLoadFinished(Loader<LoanDetailPresenter> loader, LoanDetailPresenter data) {
+        super.onLoadFinished(loader, data);
+        presenter.load(getIntent().getIntExtra("ID", 0));
     }
 }

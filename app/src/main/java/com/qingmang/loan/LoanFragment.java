@@ -1,5 +1,6 @@
 package com.qingmang.loan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,6 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * Created by jiangpw
@@ -28,7 +28,6 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
     RecyclerView rvLoan;
     @BindView(R.id.srf_loan)
     SmartRefreshLayout srfLoan;
-    Unbinder unbinder;
     @BindView(R.id.tb_loan)
     TabLayout tbLoan;
 
@@ -124,7 +123,7 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
     }
 
     @Override
-    public void onDataSuccess(LoanListEntity loanListEntity) {
+    public void onDataSuccess(final LoanListEntity loanListEntity) {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         loanAdapter = new LoanAdapter(R.layout.item_loan, loanListEntity.getContent());
         rvLoan.setAdapter(loanAdapter);
@@ -133,7 +132,11 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         loanAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(LoanDetailActivity.class);
+
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), LoanDetailActivity.class);
+                intent.putExtra("ID", loanListEntity.getContent().get(position).getId());
+                startActivity(intent);
             }
         });
     }
@@ -171,11 +174,5 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         LoanFragment fragment = new LoanFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }
