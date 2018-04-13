@@ -30,6 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -91,6 +92,10 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     TextView tvLoanDetailApplyLending;
     @BindView(R.id.rv_loan_detail_apply_need_data)
     RecyclerView rvLoanDetailApplyNeedData;
+    @BindView(R.id.tv_loan_detail_repayment_value_range)
+    TextView tvLoanDetailRepaymentValueRange;
+    @BindView(R.id.tv_loan_detail_lending_month_range)
+    TextView tvLoanDetailLendingMonthRange;
 
     @OnClick(R.id.tv_loan_detail_apply_lending)
     void tvLoanDetailApplyLendingOnclick() {
@@ -153,8 +158,12 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
         lowTerm = loanDetailEntity.getTermLower();
         upTerm = loanDetailEntity.getTermUpper();
 
-
+        tvLoanDetailIntroduct.setText(loanDetailEntity.getIntroduct());
         tvLoanDetailRangeValue.setText(loanDetailEntity.getRateLower() + "");
+
+        tvLoanDetailRepaymentValueRange.setText("额度范围" + loanDetailEntity.getLoanLower() + "元-" + loanDetailEntity.getLoanUpper() + "元");
+        tvLoanDetailLendingMonthRange.setText("期限范围" + loanDetailEntity.getTermLower() + "月-" + loanDetailEntity.getLoanUpper() + "月");
+
     }
 
     @Override
@@ -282,5 +291,12 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
                 Double.parseDouble(etLoanDetailRepaymentValue.getText().toString()))) / Double.parseDouble(etLoanDetailLendingMonth.getText().toString());
         BigDecimal bigDecimal = new BigDecimal(replayMonth);
         tvLoanDetailRepaymentValue.setText(bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue() + "");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

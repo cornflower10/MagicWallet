@@ -1,19 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/transparent"
-             android:orientation="vertical">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
- <TextView
-     android:text="1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!--<ImageView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="@drawable/actionbar_shadow_up"-->
-        <!--android:layout_gravity="bottom"-->
-        <!--android:layout_marginBottom="@dimen/bottombar_height"-->
-        <!--android:layout_height="wrap_content"/>-->
-</FrameLayout>
+        <com.yyydjk.library.BannerLayout
+            android:id="@+id/home_banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:autoPlayDuration="3000"
+            app:indicatorMargin="10dp"
+            app:indicatorPosition="centerBottom"
+            app:indicatorShape="rect"
+            app:indicatorSpace="3dp"
+            app:scrollDuration="1100"
+            app:selectedIndicatorColor="?attr/colorPrimary"
+            app:selectedIndicatorHeight="6dp"
+            app:selectedIndicatorWidth="6dp"
+            app:unSelectedIndicatorColor="#99ffffff"
+            app:unSelectedIndicatorHeight="6dp"
+            app:unSelectedIndicatorWidth="6dp">
+
+        </com.yyydjk.library.BannerLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loan_default_margin"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/loan_default_padding_big">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home_pic1" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home_pic2" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home_pic3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loan_default_margin"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:padding="@dimen/loan_default_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hot_loan"
+                android:textColor="@color/loan_name"
+                android:textSize="@dimen/loan_name_big" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/loan_default_margin_small"
+                android:layout_weight="1"
+                android:text="@string/hot_loan_message"
+                android:textColor="@color/home_more_messgae"
+                android:textSize="@dimen/home_more_messgae" />
+
+            <TextView
+                android:id="@+id/tv_home_loan_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/loan_default_margin_small"
+                android:drawableRight="@drawable/icon_more"
+                android:text="@string/more" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -35,4 +35,7 @@
     <string name="loan_detail_apply_lending">申请放款</string>
     <string name="loan_detail_lending_month_unit">月</string>
     <string name="loan_detail_apply_need_data">所需资料</string>
+    <string name="hot_loan">热门贷款</string>
+    <string name="more">更多</string>
+    <string name="hot_loan_message">据统计，申请三家以上的用户，99%都会拿到借款！</string>
 </resources>
