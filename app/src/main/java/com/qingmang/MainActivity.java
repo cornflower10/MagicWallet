@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.qingmang.base.BaseActivity;
-import com.qingmang.home.FindFragment;
+import com.qingmang.bank.FindFragment;
 import com.qingmang.home.HomeFragment;
 import com.qingmang.loan.LoanFragment;
 import com.qingmang.uilibrary.BottomBar;

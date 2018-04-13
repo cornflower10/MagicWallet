@@ -1,4 +1,4 @@
-package com.qingmang.home;
+package com.qingmang.bank;
 
 import com.qingmang.base.BaseMvpPresenter;
 

@@ -1,4 +1,4 @@
-package com.qingmang.home;
+package com.qingmang.bank;
 
 import android.os.Bundle;
 import android.view.View;
