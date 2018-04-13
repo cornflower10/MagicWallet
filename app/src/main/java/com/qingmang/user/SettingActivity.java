@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,20 +76,19 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        mCityPickerView.init(mContext);
-//        customerInfo = (CustomerInfo) getIntent().getSerializableExtra("customerInfo");
-//        if (null != customerInfo) {
-//            ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(),ivHeader, R.drawable.icon_my);
-//            etUserName.setText(customerInfo.getName());
-//            tvName.setText(customerInfo.getName());
-//            tvPhone.setText(customerInfo.getMobile());
-//            if(!TextUtils.isEmpty(customerInfo.getProvince()))
-//            tvPlace.setText(customerInfo.getProvince()+","+customerInfo.getCity()+","+customerInfo.getDistrict());
+        customerInfo = (CustomerInfo) getIntent().getSerializableExtra("customerInfo");
+        if (null != customerInfo) {
+            ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(),ivHeader, 0);
+            etUserName.setText(customerInfo.getName());
+            tvName.setText(customerInfo.getName());
+            tvPhone.setText(customerInfo.getPhone());
+            if(!TextUtils.isEmpty(customerInfo.getProvince()))
+                tvAlwaysAddress.setText(customerInfo.getProvince()+","+customerInfo.getCity());
 //            tvPlaceDetail.setText(customerInfo.getAddress());
-//            tvPhone.setText(customerInfo.getMobile());
-//            etIdCard.setText(customerInfo.getIdcard());
-//            etRealName.setText(customerInfo.getRealname());
-//            etEmail.setText(customerInfo.getEmail());
-//        }
+            etIdCard.setText(customerInfo.getIdCard());
+            etRealName.setText(customerInfo.getRealname());
+            etEmail.setText(customerInfo.getEmail());
+        }
     }
 
     @Override
