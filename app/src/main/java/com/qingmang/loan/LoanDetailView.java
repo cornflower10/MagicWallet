@@ -8,4 +8,6 @@ import com.qingmang.base.BaseView;
  */
 public interface LoanDetailView<T> extends BaseView {
     void onSuccess(T t);
+
+    void applySuccess(String msg);
 }

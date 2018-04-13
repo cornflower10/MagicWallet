@@ -37,4 +37,17 @@ public interface LoanApiService {
     @FormUrlEncoded
     @POST("open/plat/info")
     Observable<BaseEntity<LoanDetailEntity>> getLoanDetail(@Field("id") int id);
+
+
+    /**
+     * 申请
+     *
+     * @param platId
+     * @param apply
+     * @param term
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/apply/plat")
+    Observable<BaseEntity<String>> apply(@Field("platId") long platId, @Field("apply") double apply, @Field("term") int term);
 }

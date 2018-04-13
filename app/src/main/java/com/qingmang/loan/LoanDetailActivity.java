@@ -1,11 +1,14 @@
 package com.qingmang.loan;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,11 +22,15 @@ import com.qingmang.base.PresenterLoder;
 import com.qingmang.loan.entity.LoanDetailEntity;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by jiangpw
@@ -82,12 +89,35 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     RecyclerView rvLoanDetailApplyCondition;
     @BindView(R.id.tv_loan_detail_apply_lending)
     TextView tvLoanDetailApplyLending;
+    @BindView(R.id.rv_loan_detail_apply_need_data)
+    RecyclerView rvLoanDetailApplyNeedData;
+
+    @OnClick(R.id.tv_loan_detail_apply_lending)
+    void tvLoanDetailApplyLendingOnclick() {
+        if (TextUtils.isEmpty(etLoanDetailRepaymentValue.getText().toString().trim())) {
+            showToast("请输入贷款额度");
+        } else if (TextUtils.isEmpty(etLoanDetailLendingMonth.getText().toString().trim())) {
+            showToast("请输入还款期限");
+        } else {
+            presenter.apply(getIntent().getIntExtra("ID", 0),
+                    Double.parseDouble(etLoanDetailRepaymentValue.getText().toString().trim()),
+                    Integer.parseInt(etLoanDetailLendingMonth.getText().toString().trim()));
+        }
+    }
 
     private LoanDetailCondsAdapter loanDetailCondsAdapter;
     private LoanDetailProcessAdapter loanDetailProcessAdapter;
+    private LoanDetailNeedDataAdapter loanDetailNeedDataAdapter;
     private LinearLayoutManager linearLayoutManagerCons;
     private LinearLayoutManager linearLayoutManagerProcess;
+    private LinearLayoutManager linearLayoutManagerNeedData;
     private List<String> cons = new ArrayList<>();
+    private List<String> needData = new ArrayList<>();
+
+    private double lowLoan;
+    private double upLoan;
+    private double lowTerm;
+    private double upTerm;
 
     @Override
     public String setTitleName() {
@@ -118,6 +148,24 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
             tvManDetailAmountApply.setText(loanDetailEntity.getNumber());
         }
 
+        lowLoan = loanDetailEntity.getLoanLower();
+        upLoan = loanDetailEntity.getLoanUpper();
+        lowTerm = loanDetailEntity.getTermLower();
+        upTerm = loanDetailEntity.getTermUpper();
+
+
+        tvLoanDetailRangeValue.setText(loanDetailEntity.getRateLower() + "");
+    }
+
+    @Override
+    public void applySuccess(String msg) {
+        showToast(msg);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 2 * 1000);
     }
 
     private void initAdapter(LoanDetailEntity loanDetailEntity) {
@@ -130,11 +178,21 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
         linearLayoutManagerProcess = new LinearLayoutManager(this);
         linearLayoutManagerProcess.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+        needData.clear();
+        needData.add("手机号");
+        needData.add("银行卡");
+        needData.add("个人征信");
+        loanDetailNeedDataAdapter = new LoanDetailNeedDataAdapter(R.layout.item_loan_detail_cons, needData);
+        linearLayoutManagerNeedData = new LinearLayoutManager(this);
+
         rvLoanDetailApplyCondition.setLayoutManager(linearLayoutManagerCons);
         rvLoanDetailApplyCondition.setAdapter(loanDetailCondsAdapter);
 
         rvLoanDetailApplyProcess.setLayoutManager(linearLayoutManagerProcess);
         rvLoanDetailApplyProcess.setAdapter(loanDetailProcessAdapter);
+
+        rvLoanDetailApplyNeedData.setAdapter(loanDetailNeedDataAdapter);
+        rvLoanDetailApplyNeedData.setLayoutManager(linearLayoutManagerNeedData);
     }
 
     @Override
@@ -151,5 +209,78 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     public void onLoadFinished(Loader<LoanDetailPresenter> loader, LoanDetailPresenter data) {
         super.onLoadFinished(loader, data);
         presenter.load(getIntent().getIntExtra("ID", 0));
+
+        etLoanDetailRepaymentValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s.toString())) {
+                    Pattern p = Pattern.compile("^(100|[1-9]\\d|\\d*00)$");
+                    Matcher m = p.matcher(s.toString());
+                    if (Integer.parseInt(s.toString()) < lowLoan) {
+                        showToast("最低贷款额是" + lowLoan);
+                    } else if (Integer.parseInt(s.toString()) > upLoan) {
+                        showToast("最高贷款额是" + upLoan);
+                        etLoanDetailRepaymentValue.setText((int) upLoan + "");
+                    } else if (m.find() || ("").equals(s.toString())) {
+                        System.out.print("OK!");
+                    } else {
+                        System.out.print("False!");
+                        showToast("只能输入100的倍数");
+                    }
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(etLoanDetailLendingMonth.getText().toString())) {
+                    setMonthReplyValue();
+                }
+            }
+        });
+
+        etLoanDetailLendingMonth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s.toString())) {
+                    if (Integer.parseInt(s.toString()) < lowTerm) {
+                        showToast("最低还款期限是" + lowTerm);
+                    } else if (Integer.parseInt(s.toString()) > upTerm) {
+                        showToast("最高还款期限是" + upTerm);
+                        etLoanDetailLendingMonth.setText((int) upTerm + "");
+                    } else {
+                        if (!TextUtils.isEmpty(etLoanDetailRepaymentValue.getText().toString())) {
+                            setMonthReplyValue();
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    /**
+     * 计算每月还款额度
+     */
+    private void setMonthReplyValue() {
+        double replayMonth = (Double.parseDouble(etLoanDetailRepaymentValue.getText().toString()) + (Double.parseDouble(tvLoanDetailRangeValue.getText().toString()) *
+                Double.parseDouble(etLoanDetailRepaymentValue.getText().toString()))) / Double.parseDouble(etLoanDetailLendingMonth.getText().toString());
+        BigDecimal bigDecimal = new BigDecimal(replayMonth);
+        tvLoanDetailRepaymentValue.setText(bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue() + "");
     }
 }

@@ -15,6 +15,11 @@ import io.reactivex.functions.Consumer;
  * on 2018/4/11 11:56
  */
 public class LoanDetailPresenter extends BaseMvpPresenter<LoanDetailView> {
+    /**
+     * 加载数据
+     *
+     * @param id
+     */
     void load(int id) {
         addSubscribe(App.getInstance().getRetrofitServiceManager().create(LoanApiService.class).getLoanDetail(id)
                 .compose(ResponseTransformer.<LoanDetailEntity>handleResult())
@@ -28,6 +33,30 @@ public class LoanDetailPresenter extends BaseMvpPresenter<LoanDetailView> {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         getMvpView().onError(App.getInstance().getResources().getString(R.string.fail_message));
+                    }
+                }));
+    }
+
+    /**
+     * 申请
+     *
+     * @param platId
+     * @param apply
+     * @param term
+     */
+    void apply(int platId, double apply, int term) {
+        addSubscribe(App.getInstance().getRetrofitServiceManager().create(LoanApiService.class).apply(platId, apply, term)
+                .compose(ResponseTransformer.<String>handleResult())
+                .compose(RxSchedulers.<String>ObToMain())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        getMvpView().applySuccess("申请成功");
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
                     }
                 }));
     }
