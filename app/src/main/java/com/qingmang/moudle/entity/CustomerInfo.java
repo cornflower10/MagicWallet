@@ -1,10 +1,12 @@
 package com.qingmang.moudle.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by xiejingbao on 2018/4/10.
  */
 
-public class CustomerInfo {
+public class CustomerInfo implements Serializable{
 
     /**
      * id : 1
@@ -61,6 +63,10 @@ public class CustomerInfo {
     private String realname;
     private String email;
     private String idCard;
+    private int creditnum;
+
+    private double loanbalance;
+    private double smallchange;
 
     public int getId() {
         return id;
@@ -268,5 +274,29 @@ public class CustomerInfo {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public int getCreditnum() {
+        return creditnum;
+    }
+
+    public void setCreditnum(int creditnum) {
+        this.creditnum = creditnum;
+    }
+
+    public double getLoanbalance() {
+        return loanbalance;
+    }
+
+    public void setLoanbalance(double loanbalance) {
+        this.loanbalance = loanbalance;
+    }
+
+    public double getSmallchange() {
+        return smallchange;
+    }
+
+    public void setSmallchange(double smallchange) {
+        this.smallchange = smallchange;
     }
 }

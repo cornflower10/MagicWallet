@@ -24,6 +24,15 @@
         <activity
             android:name=".loan.LoanDetailActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".user.SettingActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".user.RegisterActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".user.LoginActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".user.ForgetPasswdActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".bank.BankCardListActivity"/>
     </application>
 
 </manifest>

@@ -3,15 +3,17 @@ package com.qingmang;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.qingmang.base.BaseActivity;
 import com.qingmang.home.FindFragment;
 import com.qingmang.home.HomeFragment;
-import com.qingmang.home.MyFragment;
 import com.qingmang.loan.LoanFragment;
 import com.qingmang.uilibrary.BottomBar;
 import com.qingmang.uilibrary.BottomBarTab;
+import com.qingmang.user.MyFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 
 import static com.qingmang.R.id.fl_container;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(fl_container)
     FrameLayout flContainer;
@@ -46,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
-        mBottomBar.addItem(new BottomBarTab(this, R.mipmap.index))
-                .addItem(new BottomBarTab(this, R.drawable.icon_tab_loan))
-                .addItem(new BottomBarTab(this, R.mipmap.find))
-                .addItem(new BottomBarTab(this, R.mipmap.my));
+        mBottomBar.addItem(new BottomBarTab(this, R.drawable.icon_tab_home,R.drawable.icon_tab_home_cur))
+                .addItem(new BottomBarTab(this, R.drawable.icon_tab_loan,R.drawable.icon_tab_loan_cur))
+                .addItem(new BottomBarTab(this, R.drawable.icon_tab_card,R.drawable.icon_tab_card_cur))
+                .addItem(new BottomBarTab(this, R.drawable.icon_tab_my, R.drawable.icon_tab_my_cur));
 
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(int position) {
-                final Fragment currentFragment = mFragments.get(position);
+//                final Fragment currentFragment = mFragments.get(position);
 //                int count = currentFragment.getChildFragmentManager().getBackStackEntryCount();
 //
 //                // 如果不在该类别Fragment的主页,则回到主页;
@@ -207,4 +209,22 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction.commit();
     }
+
+
+    private long exitTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再点一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                App.getInstance().getForegroundCallbacks().appExit();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

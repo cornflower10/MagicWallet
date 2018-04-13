@@ -1,5 +1,6 @@
 package com.qingmang.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.qingmang.App;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
@@ -83,11 +83,11 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
         mPresenter.loadData();
     }
 
-    public static com.qingmang.home.MyFragment newInstance() {
+    public static MyFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        com.qingmang.home.MyFragment fragment = new com.qingmang.home.MyFragment();
+      MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -106,12 +106,10 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
     public void onDataSuccess(CustomerInfo customerInfo) {
         this.customerInfo = customerInfo;
         tvName.setText(customerInfo.getName());
-//        tvAmount.setText(String.valueOf(customerInfo.getScore()));
-//        tvYhj.setText(String.valueOf(customerInfo.getCouponum()));
-//        tvDzf.setText(String.valueOf(customerInfo.getOrdersnum()));
+        tvAmount.setText(String.valueOf(customerInfo.getLoanbalance()));
+        tvYhj.setText(String.valueOf(customerInfo.getCreditnum()));
+        tvDzf.setText(String.valueOf(customerInfo.getSmallchange()));
         ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(),ivHeader, 0);
-
-
     }
 
     @Override
@@ -122,16 +120,15 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
 
     @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf})
     public void onViewClicked(View view) {
-        if(!App.getInstance().isLogin()){
-            startActivity(LoginActivity.class);
-            return;
-        }
+//        if(!App.getInstance().isLogin()){
+//            startActivity(LoginActivity.class);
+//            return;
+//        }
         switch (view.getId()) {
             case R.id.iv_setting:
-//                startActivity();
-//                Intent intent = new Intent(mContext, SettingActivity.class);
-//                intent.putExtra("customerInfo",customerInfo);
-//                startActivity(intent);
+                Intent intent = new Intent(mContext, SettingActivity.class);
+                intent.putExtra("customerInfo",customerInfo);
+                startActivity(intent);
                 break;
             case R.id.ll_rzqy:
 //                startActivity(AuthCompanyActivity.class);

@@ -1,6 +1,7 @@
 package com.qingmang;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +27,15 @@ public abstract class BaseFragment extends Fragment {
     public boolean isFirst;
     protected LoadViewHelper loadViewHelper;
     protected abstract View getRootView();
+
+    public Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
 
     @Nullable
     @Override
