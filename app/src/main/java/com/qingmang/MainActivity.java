@@ -1,14 +1,16 @@
 package com.qingmang;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.qingmang.base.BaseActivity;
 import com.qingmang.bank.FindFragment;
+import com.qingmang.base.BaseActivity;
 import com.qingmang.home.HomeFragment;
 import com.qingmang.loan.LoanFragment;
 import com.qingmang.uilibrary.BottomBar;
@@ -56,7 +58,7 @@ public class MainActivity extends BaseActivity {
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 switch (position) {
                     case 0:
                         if (null == homeFragment) {
@@ -132,7 +134,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        android.app.FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         if (null != homeFragment && homeFragment.isAdded()) {
             manager.putFragment(outState, "homeFragment", homeFragment);
         }
@@ -154,13 +156,13 @@ public class MainActivity extends BaseActivity {
      * @param savedInstanceState
      */
     private void initFragment(Bundle savedInstanceState) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (savedInstanceState != null) {
 
-            homeFragment = (HomeFragment) getFragmentManager().getFragment(savedInstanceState, "homeFragment");
-            loanFragment = (LoanFragment) getFragmentManager().getFragment(savedInstanceState, "loanFragment");
-            myFragment = (MyFragment) getFragmentManager().getFragment(savedInstanceState, "myFragment");
-            findFragment = (FindFragment) getFragmentManager().getFragment(savedInstanceState, "findFragment");
+            homeFragment = (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, "homeFragment");
+            loanFragment = (LoanFragment) getSupportFragmentManager().getFragment(savedInstanceState, "loanFragment");
+            myFragment = (MyFragment) getSupportFragmentManager().getFragment(savedInstanceState, "myFragment");
+            findFragment = (FindFragment) getSupportFragmentManager().getFragment(savedInstanceState, "findFragment");
 
         } else {
             homeFragment = HomeFragment.newInstance();
@@ -195,7 +197,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showHideFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if (!mFragments.contains(fragment)) {
             mFragments.add(fragment);

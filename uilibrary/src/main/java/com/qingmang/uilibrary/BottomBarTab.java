@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -49,7 +48,7 @@ public class BottomBarTab extends FrameLayout {
         params.gravity = Gravity.CENTER;
         mIcon.setImageResource(icon);
         mIcon.setLayoutParams(params);
-        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
+//        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
         addView(mIcon);
     }
 

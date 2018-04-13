@@ -1,12 +1,22 @@
 package com.qingmang.bank;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.qingmang.R;
+import com.qingmang.adapter.HotBanksAdapter;
+import com.qingmang.adapter.HotCreditCardAdapter;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
+import com.qingmang.moudle.entity.Bank;
+import com.qingmang.moudle.entity.CreditCard;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -14,10 +24,21 @@ import butterknife.BindView;
  * Created by xiejingbao on 2017/9/14.
  */
 
-public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> implements FindView<Find> {
-    @BindView(R.id.tv)
-    TextView tv;
+public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> implements FindView<List<CreditCard>> {
 
+
+    @BindView(R.id.rv_bank)
+    RecyclerView rvBank;
+    @BindView(R.id.rv_hot_bankcard)
+    RecyclerView rvHotBankcard;
+    @BindView(R.id.ll_root)
+    LinearLayout llRoot;
+
+
+    private List<CreditCard> creditCards = new ArrayList<>();
+    private List<Bank> banks = new ArrayList<>();
+    private HotCreditCardAdapter hotCreditCardAdapter;
+    private HotBanksAdapter hotBanksAdapter;
 
     @Override
     protected int getLayoutResource() {
@@ -27,8 +48,17 @@ public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> imple
     @Override
     protected void initView() {
         LogManager.i("FindFragment-----");
-        loadViewHelper.showLoading("加载中...");
+        loadViewHelper.showLoading("");
+        hotCreditCardAdapter = new HotCreditCardAdapter(creditCards);
+        rvHotBankcard.setLayoutManager(new LinearLayoutManager(mContext));
+        rvHotBankcard.setAdapter(hotCreditCardAdapter);
+
+
+        hotBanksAdapter = new HotBanksAdapter(banks);
+        rvBank.setAdapter(hotBanksAdapter);
+        rvBank.setLayoutManager(new GridLayoutManager(mContext, 4));
         mPresenter.loadData();
+        mPresenter.hotBanks();
 
     }
 
@@ -54,17 +84,26 @@ public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> imple
 
     @Override
     protected View getRootView() {
-        return tv;
+        return llRoot;
     }
 
     @Override
     public void onError(String msg) {
+        loadViewHelper.restore();
         showShortToast(msg);
     }
 
     @Override
-    public void onDataSuccess(Find find) {
-        LogManager.i("-------onDataSuccess------");
+    public void onDataSuccess(List<CreditCard> creditCards1) {
+        loadViewHelper.restore();
+        hotCreditCardAdapter.replaceData(creditCards1);
     }
+
+    @Override
+    public void onBankSuccess(List<Bank> banks) {
+        loadViewHelper.restore();
+        hotBanksAdapter.replaceData(banks);
+    }
+
 
 }

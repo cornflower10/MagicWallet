@@ -122,7 +122,7 @@
                 android:id="@+id/bt_sure"
                 android:layout_marginTop="25dp"
                 android:text="提交"
-                android:background="@color/bg_0179f4"
+                android:background="@color/loan_normal"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_18"
                 android:layout_marginBottom="26dp"

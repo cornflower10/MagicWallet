@@ -1,8 +1,12 @@
 package com.qingmang.api;
 
 
+import com.qingmang.moudle.entity.Bank;
 import com.qingmang.moudle.entity.BaseEntity;
+import com.qingmang.moudle.entity.CreditCard;
 import com.qingmang.moudle.entity.CustomerInfo;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -18,14 +22,13 @@ public interface ApiService {
 
     /**
      * 注册
-     *
      */
     @FormUrlEncoded
     @POST("member/regist")
     Observable<BaseEntity<String>> Regist(@Field("phone") String phone,
-                                 @Field("code") String code,
-                                  @Field("phoneModel") String phoneModel,
-                                  @Field("pwd") String pwd);
+                                          @Field("code") String code,
+                                          @Field("phoneModel") String phoneModel,
+                                          @Field("pwd") String pwd);
 
     /**
      * 登录
@@ -33,17 +36,18 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("member/login")
     Observable<BaseEntity<String>> Login(@Field("phone") String phone,
-                                              @Field("pwd") String passWd
-                                              );
+                                         @Field("pwd") String passWd
+    );
 
     /**
      * 注册短信验证码
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("regist/sms")
     Observable<BaseEntity<String>> RegistSMS(@Field("phone") String phone,
-                                                     @Field("idCard") String idCard
+                                             @Field("idCard") String idCard
     );
 
 
@@ -51,9 +55,9 @@ public interface ApiService {
     Observable<BaseEntity<CustomerInfo>> CusomerInfo();
 
 
-
     /**
      * 修改短信验证码
+     *
      * @return
      */
     @FormUrlEncoded
@@ -63,15 +67,15 @@ public interface ApiService {
 
     /**
      * 修改短信验证码
+     *
      * @return
      */
     @FormUrlEncoded
     @POST("member/update/pwd")
     Observable<BaseEntity<String>> UpdatePasswd(@Field("phone") String phone,
-                                                   @Field("pwd") String pwd,
-                                                   @Field("code") String code
+                                                @Field("pwd") String pwd,
+                                                @Field("code") String code
     );
-
 
 
 //
@@ -94,4 +98,25 @@ public interface ApiService {
 //    @POST("agency/shuanglu/isAgencyNameUsed")
 //    Observable<AgencyNameUsed> isAgencyNameUsed(@Field("customName") String customName,
 //                                                @Field("sign") String sign);
+
+
+    /**
+     * 热门信用卡
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("open/card/hot")
+    Observable<BaseEntity<List<CreditCard>>> HotCreidtCard(@Field("pageSize") int pageSize
+    );
+
+    /**
+     * 热门银行
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("open/bank/hot")
+    Observable<BaseEntity<List<Bank>>> HotBank(@Field("pageSize") int pageSize);
+
 }
