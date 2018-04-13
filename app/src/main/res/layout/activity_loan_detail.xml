@@ -227,6 +227,7 @@
                         </FrameLayout>
 
                         <TextView
+                            android:id="@+id/tv_loan_detail_repayment_value_range"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/loan_default_margin_small"
@@ -268,6 +269,7 @@
                         </FrameLayout>
 
                         <TextView
+                            android:id="@+id/tv_loan_detail_lending_month_range"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/loan_default_margin_small"
