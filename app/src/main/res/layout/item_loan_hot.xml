@@ -12,7 +12,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/loan_default_padding">
+        android:padding="@dimen/loan_default_padding_big">
 
         <ImageView
             android:id="@+id/iv_icon_loan"

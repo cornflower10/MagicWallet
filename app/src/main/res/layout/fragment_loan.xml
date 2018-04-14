@@ -7,15 +7,13 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="@color/white"
-        android:gravity="center"
-        android:padding="@dimen/loan_default_padding"
+        android:textSize="@dimen/sp_16"
+        android:padding="@dimen/margin_16"
         android:text="@string/loan"
-        android:textColor="@color/loan_name"
-        android:textSize="@dimen/loan_name_big" />
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tb_loan"
