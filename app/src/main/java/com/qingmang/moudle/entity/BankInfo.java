@@ -43,7 +43,7 @@ public class BankInfo {
     private int scopeUpper;
     private int scopeLower;
     private String app;
-    private Object appLogo;
+    private String appLogo;
     private String hotLine;
     private String state;
     private int number;
@@ -168,11 +168,11 @@ public class BankInfo {
         this.app = app;
     }
 
-    public Object getAppLogo() {
+    public String getAppLogo() {
         return appLogo;
     }
 
-    public void setAppLogo(Object appLogo) {
+    public void setAppLogo(String appLogo) {
         this.appLogo = appLogo;
     }
 
