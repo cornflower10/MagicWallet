@@ -1,7 +1,6 @@
 package com.qingmang.loan;
 
 import com.qingmang.App;
-import com.qingmang.R;
 import com.qingmang.api.LoanApiService;
 import com.qingmang.base.BaseMvpPresenter;
 import com.qingmang.loan.entity.LoanDetailEntity;
@@ -32,7 +31,7 @@ public class LoanDetailPresenter extends BaseMvpPresenter<LoanDetailView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        getMvpView().onError(App.getInstance().getResources().getString(R.string.fail_message));
+                        getMvpView().onError(throwable.getMessage());
                     }
                 }));
     }
@@ -56,7 +55,7 @@ public class LoanDetailPresenter extends BaseMvpPresenter<LoanDetailView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        getMvpView().onError(throwable.getMessage());
                     }
                 }));
     }

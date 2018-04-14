@@ -53,6 +53,7 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
 
     @Override
     protected void initView() {
+        loadViewHelper.showLoading("");
         initTab();
         initRefresh();
 
@@ -124,6 +125,7 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
 
     @Override
     public void onDataSuccess(final LoanListEntity loanListEntity) {
+        loadViewHelper.restore();
         linearLayoutManager = new LinearLayoutManager(getActivity());
         loanAdapter = new LoanAdapter(R.layout.item_loan, loanListEntity.getContent());
         rvLoan.setAdapter(loanAdapter);
@@ -148,6 +150,7 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
 
     @Override
     public void onError(String msg) {
+        loadViewHelper.restore();
         loadViewHelper.showError(msg, getResources().getString(R.string.click_reload), new View.OnClickListener() {
             @Override
             public void onClick(View v) {

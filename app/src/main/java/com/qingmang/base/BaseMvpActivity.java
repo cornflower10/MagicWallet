@@ -1,6 +1,7 @@
 package com.qingmang.base;
 
 
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -74,7 +75,7 @@ public abstract class BaseMvpActivity<P extends Presenter<V>,V extends BaseView>
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("");
             if(showBack){
-                toolbar.setNavigationIcon(R.drawable.icon_back);
+                toolbar.setNavigationIcon(R.drawable.back);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
             TextView textView = (TextView) findViewById(R.id.title_name);

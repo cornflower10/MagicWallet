@@ -36,7 +36,7 @@ public class LoanPresenter extends BaseMvpPresenter<LoanView> {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        getMvpView().onError(App.getInstance().getResources().getString(R.string.fail_message));
+                        getMvpView().onError(throwable.getMessage());
                     }
                 }));
     }

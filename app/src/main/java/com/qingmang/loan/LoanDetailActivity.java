@@ -131,7 +131,7 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
 
     @Override
     public View getRootView() {
-        return null;
+        return rvLoanDetailApplyProcess;
     }
 
     @Override
@@ -142,6 +142,7 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     @Override
     public void onSuccess(LoanDetailEntity loanDetailEntity) {
 
+        loadViewHelper.restore();
         initAdapter(loanDetailEntity);
 
         tvLoanDetailName.setText(loanDetailEntity.getName());
@@ -217,6 +218,7 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     @Override
     public void onLoadFinished(Loader<LoanDetailPresenter> loader, LoanDetailPresenter data) {
         super.onLoadFinished(loader, data);
+        loadViewHelper.showLoading("");
         presenter.load(getIntent().getIntExtra("ID", 0));
 
         etLoanDetailRepaymentValue.addTextChangedListener(new TextWatcher() {
@@ -279,6 +281,17 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+    }
+
+    @Override
+    public void onError(String msg) {
+        loadViewHelper.restore();
+        loadViewHelper.showError(msg, getResources().getString(R.string.click_reload), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.load(getIntent().getIntExtra("ID", 0));
             }
         });
     }

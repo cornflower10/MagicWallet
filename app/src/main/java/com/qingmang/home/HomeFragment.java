@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
+import com.qingmang.adapter.HotCreditCardAdapter;
+import com.qingmang.bank.HotBankInfoActivity;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.loan.LoanAdapter;
 import com.qingmang.loan.LoanDetailActivity;
 import com.qingmang.loan.entity.LoanListEntity;
+import com.qingmang.moudle.entity.CreditCard;
 import com.qingmang.uilibrary.BottomBar;
 import com.yyydjk.library.BannerLayout;
 
@@ -34,6 +37,10 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
     TextView tvHomeLoanMore;
     @BindView(R.id.rv_home)
     RecyclerView rvHome;
+    @BindView(R.id.rv_home_hot_card)
+    RecyclerView rvHomeHotCard;
+    @BindView(R.id.tv_home_loan_card_more)
+    TextView tvHomeLoanCardMore;
 
     @OnClick(R.id.tv_home_loan_more)
     void tvHomeLoanMoreOnclick() {
@@ -41,12 +48,21 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
         bottomBar.setCurrentItem(1);
     }
 
+    @OnClick(R.id.tv_home_loan_card_more)
+    void tvHomeLoanCardMoreOnclick() {
+        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
+        bottomBar.setCurrentItem(2);
+    }
+
     private LoanAdapter loanAdapter;
     private LinearLayoutManager linearLayoutManager;
 
+    private HotCreditCardAdapter hotCreditCardAdapter;
+    private List<CreditCard> creditCards = new ArrayList<>();
+
     @Override
     protected View getRootView() {
-        return null;
+        return rvHome;
     }
 
     @Override
@@ -56,6 +72,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
 
     @Override
     protected void initView() {
+        loadViewHelper.showLoading("");
         initBanner();
         getData(1, 20, null, false);
     }
@@ -121,8 +138,34 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
     }
 
     @Override
-    public void onError(String msg) {
+    public void onCardSuccess(final List<CreditCard> creditCards) {
+        loadViewHelper.restore();
+        hotCreditCardAdapter = new HotCreditCardAdapter(creditCards);
+        rvHomeHotCard.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvHomeHotCard.setAdapter(hotCreditCardAdapter);
 
+        hotCreditCardAdapter.replaceData(creditCards);
+
+        hotCreditCardAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), HotBankInfoActivity.class);
+                intent.putExtra("id", creditCards.get(position).getId());
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onError(String msg) {
+        loadViewHelper.restore();
+        loadViewHelper.showError(msg, getResources().getString(R.string.click_reload), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getData(1, 20, null, false);
+            }
+        });
     }
 
     /**
@@ -134,5 +177,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
      */
     private void getData(int pageNumber, int pageSize, String orderCond, boolean isLoadMore) {
         mPresenter.loadLoan(pageNumber, pageSize, orderCond, isLoadMore);
+        mPresenter.hotBanks();
     }
 }

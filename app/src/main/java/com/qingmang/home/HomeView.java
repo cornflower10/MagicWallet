@@ -1,6 +1,9 @@
 package com.qingmang.home;
 
 import com.qingmang.base.BaseView;
+import com.qingmang.moudle.entity.CreditCard;
+
+import java.util.List;
 
 /**
  * Created by jiangpw
@@ -12,4 +15,6 @@ public interface HomeView<T> extends BaseView {
     void loanSuccess(T t);
 
     void messageSuccess();
+
+    void onCardSuccess(List<CreditCard> creditCards);
 }

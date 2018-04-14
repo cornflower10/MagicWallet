@@ -64,7 +64,7 @@
             android:layout_marginTop="@dimen/loan_default_margin"
             android:background="@android:color/white"
             android:gravity="center_vertical"
-            android:padding="@dimen/loan_default_padding">
+            android:padding="@dimen/loan_default_padding_big">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,6 +93,42 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loan_default_margin"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:padding="@dimen/loan_default_padding_big">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hot_loan_card"
+                android:textColor="@color/loan_name"
+                android:textSize="@dimen/loan_name_big" />
+
+            <TextView
+                android:id="@+id/tv_home_loan_card_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/loan_default_margin_small"
+                android:drawableRight="@drawable/icon_more"
+                android:text="@string/more" />
+        </LinearLayout>
+
+        <View style="@style/HorizontalLine" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_home_hot_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white">
