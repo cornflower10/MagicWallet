@@ -48,7 +48,7 @@ public class CustomerInfo implements Serializable{
     private String phoneModel;
     private String province;
     private String city;
-    private Object address;
+    private String address;
     private String token;
     private String ip;
     private String state;
@@ -156,11 +156,11 @@ public class CustomerInfo implements Serializable{
         this.city = city;
     }
 
-    public Object getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Object address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

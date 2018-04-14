@@ -52,9 +52,15 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
     AppCompatEditText etIdCard;
     @BindView(R.id.iv_header)
     ImageView ivHeader;
+    @BindView(R.id.tv_work)
+    TextView tvWork;
+    @BindView(R.id.tv_income)
+    TextView tvIncome;
+    @BindView(R.id.tv_commpany_name)
+    TextView tvCommpanyName;
     private CustomerInfo customerInfo;
 
-    public static final String FROM_UPDATE= "SettingActivity";
+    public static final String FROM_UPDATE = "SettingActivity";
     private File imageFile;
 
     @Override
@@ -78,23 +84,26 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
 //        mCityPickerView.init(mContext);
         customerInfo = (CustomerInfo) getIntent().getSerializableExtra("customerInfo");
         if (null != customerInfo) {
-            ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(),ivHeader, 0);
+            ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(), ivHeader, 0);
             etUserName.setText(customerInfo.getName());
             tvName.setText(customerInfo.getName());
             tvPhone.setText(customerInfo.getPhone());
-            if(!TextUtils.isEmpty(customerInfo.getProvince()))
-                tvAlwaysAddress.setText(customerInfo.getProvince()+","+customerInfo.getCity());
-//            tvPlaceDetail.setText(customerInfo.getAddress());
+            if (!TextUtils.isEmpty(customerInfo.getProvince()))
+                tvAlwaysAddress.setText(customerInfo.getProvince() + "," + customerInfo.getCity());
+            tvPlaceDetail.setText(customerInfo.getAddress());
             etIdCard.setText(customerInfo.getIdCard());
             etRealName.setText(customerInfo.getRealname());
             etEmail.setText(customerInfo.getEmail());
+            tvIncome.setText(customerInfo.getIncome());
+            tvWork.setText(customerInfo.getWorkstate());
+            tvCommpanyName.setText(customerInfo.getUnitname());
         }
     }
 
     @Override
     public void onDataSuccess(String s) {
-         showToast("修改成功");
-         finish();
+        showToast("修改成功");
+        finish();
     }
 
     @Override
@@ -107,20 +116,20 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
         });
     }
 
-//    @OnClick({R.id.tv_always_address, R.id.tv_place, R.id.tv_update_passwd, R.id.bt_commit})
+//    @OnClick({R.id.tv_always_address,R.id.bt_commit})
 //    public void onViewClicked(View view) {
 //        switch (view.getId()) {
 //            case R.id.tv_always_address:
-//                startActivity(AddressListActivity.class);
+////                startActivity(AddressListActivity.class);
 //                break;
-//            case R.id.tv_place:
-//                initWheel();
-//                break;
-//            case R.id.tv_update_passwd:
-//                Intent intent =new Intent(mContext,ForgetPasswdActivity.class);
-//                intent.putExtra(FROM_UPDATE,true);
-//                startActivity(intent);
-//                break;
+////            case R.id.tv_place:
+////                initWheel();
+////                break;
+////            case R.id.tv_update_passwd:
+////                Intent intent =new Intent(mContext,ForgetPasswdActivity.class);
+////                intent.putExtra(FROM_UPDATE,true);
+////                startActivity(intent);
+////                break;
 //            case R.id.bt_commit:
 //
 //                String idCard = etIdCard.getText().toString();
@@ -147,7 +156,7 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
 //                }
 //
 //                startProgressDialog();
-//                presenter.updateInfo2(tvName.getText().toString(),
+//                presenter.updateInfo(tvName.getText().toString(),
 //                        imageFile,province,city,areas,tvPlaceDetail.getText().toString(),
 //                        etRealName.getText().toString(),idCard,etEmail.getText().toString());
 //                break;
@@ -208,7 +217,7 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
 //            }
 //        });
 //        mCityPickerView.showCityPicker();
-//
+
 //    }
 
     private void ChooseImages() {
@@ -223,6 +232,7 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
                 .setPreviewEnabled(false)
                 .start(SettingActivity.this, PhotoPicker.REQUEST_CODE);
     }
+
     @OnClick(R.id.iv_header)
     public void onViewClicked() {
         ChooseImages();
@@ -231,12 +241,12 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PhotoPicker.REQUEST_CODE){
-            if(resultCode==RESULT_OK){
+        if (requestCode == PhotoPicker.REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
 
                 ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
 
-               String imageUrl = photos.get(0);
+                String imageUrl = photos.get(0);
                 compressWithRx(imageUrl);
 
             }
@@ -261,17 +271,16 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
                     public void accept(@NonNull File file) throws Exception {
                         stopProgressDialog();
                         imageFile = file;
-                      ImageLoaderUtil.getInstance().loadLocalCircleImage(file,ivHeader, 0);
+                        ImageLoaderUtil.getInstance().loadLocalCircleImage(file, ivHeader, 0);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         stopProgressDialog();
-                        LogManager.e("压缩失败..",throwable);
+                        LogManager.e("压缩失败..", throwable);
                     }
                 });
     }
-
 
 
 }

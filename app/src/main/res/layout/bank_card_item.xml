@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="@android:color/white"
+             android:orientation="vertical"
+           >
+     <RelativeLayout
+         android:layout_marginTop="@dimen/margin_16"
+         android:layout_marginBottom="@dimen/margin_16"
+         android:layout_marginLeft="@dimen/margin_16"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+         <ImageView
+             android:id="@+id/iv_bank_icon"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:layout_marginLeft="4dp"
+             android:layout_toRightOf="@+id/iv_bank_icon"
+             android:text="交通银行"
+             android:id="@+id/tv_bank_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+
+         <TextView
+             android:id="@+id/tv_card_type"
+             android:layout_marginLeft="4dp"
+             android:layout_below="@+id/tv_bank_name"
+             android:layout_toRightOf="@+id/iv_bank_icon"
+             android:layout_marginTop="8dp"
+             android:text="储蓄卡"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+
+         <LinearLayout
+             android:layout_marginRight="@dimen/margin_16"
+             android:layout_marginTop="8dp"
+             android:layout_marginLeft="4dp"
+             android:layout_below="@+id/tv_card_type"
+             android:layout_toRightOf="@+id/iv_bank_icon"
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:textSize="@dimen/sp_16"
+                 android:layout_weight="1"
+                 android:text="****"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content" />
+             <TextView
+                 android:textSize="@dimen/sp_16"
+                 android:layout_weight="1"
+                 android:text="****"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content" />
+             <TextView
+                 android:textSize="@dimen/sp_16"
+                 android:layout_weight="1"
+                 android:text="****"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content" />
+             <TextView
+                 android:id="@+id/tv_card_number"
+                 android:textSize="@dimen/sp_16"
+                 android:text="3507"
+                 android:layout_weight="1"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content" />
+         </LinearLayout>
+     </RelativeLayout>
+
+
+</LinearLayout>

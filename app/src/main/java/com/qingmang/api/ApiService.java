@@ -2,17 +2,25 @@ package com.qingmang.api;
 
 
 import com.qingmang.moudle.entity.Bank;
+import com.qingmang.moudle.entity.BankCard;
+import com.qingmang.moudle.entity.BankInfo;
 import com.qingmang.moudle.entity.BaseEntity;
 import com.qingmang.moudle.entity.CreditCard;
 import com.qingmang.moudle.entity.CustomerInfo;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * Created by xiejingbao on 2017/5/18.
@@ -78,26 +86,23 @@ public interface ApiService {
     );
 
 
-//
-//
-//
-//    @FormUrlEncoded
-//    @POST("agency/shuanglu/changePassword")
-//    Observable<ChangePasswdEntity> changePasswd(@Field("oldPassword") String userName,
-//                                                @Field("newPassword") String passWd,
-//                                                @Field("sign") String sign
-//    );
-//
-//    //上传同时
-//    @Multipart
-//    @POST("agency/shuanglu/submitIntentAgencyInfo")
-//    Observable<UploadEntity> uploads(@PartMap Map<String, RequestBody> params
-//    );
-//
-//    @FormUrlEncoded
-//    @POST("agency/shuanglu/isAgencyNameUsed")
-//    Observable<AgencyNameUsed> isAgencyNameUsed(@Field("customName") String customName,
-//                                                @Field("sign") String sign);
+
+    @Multipart
+    @POST("member/info/update")
+    Observable<BaseEntity<String>> UpdateCustomer(@Part("name") RequestBody name,
+                                                   @Part MultipartBody.Part file,
+                                                   @Part("province") RequestBody province,
+                                                   @Part("city") RequestBody city,
+                                                   @Part("address") RequestBody address,
+
+                                                   @Part("workstate") RequestBody workstate,
+                                                   @Part("income") RequestBody income,
+                                                   @Part("unitname") RequestBody unitname,
+
+                                                   @Part("realname") RequestBody realname,
+                                                   @Part("idcard") RequestBody idcard,
+                                                   @Part("email") RequestBody email);
+
 
 
     /**
@@ -118,5 +123,39 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("open/bank/hot")
     Observable<BaseEntity<List<Bank>>> HotBank(@Field("pageSize") int pageSize);
+
+    /**
+     * 热门银行详情
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("open/bank/info")
+    Observable<BaseEntity<BankInfo>> HotBankInfo(@Field("id") long id);
+
+
+
+    @GET("member/bind/credit/list")
+    Observable<BaseEntity<List<BankCard>>> BDCreditCards();
+
+
+    @Multipart
+    @POST("member/bind/credit")
+    Observable<BaseEntity<String>> BdCreditCard(@Part("bankName") RequestBody bankName,
+                                                @Part("creditcode") RequestBody creditcode,
+                                                @Part("ownerName") RequestBody ownerName,
+                                                @Part("creditLine") RequestBody creditLine,
+                                                @Part("cvn2") RequestBody cvn2,
+                                                @Part("valiDate") RequestBody valiDate,
+                                                @Part("repayDate") RequestBody repayDate,
+                                                @Part MultipartBody.Part file
+                                                );
+
+
+    @Multipart
+    @POST("member/bind/credit")
+    Observable<BaseEntity<String>> BdCreditCard2(@PartMap Map<String, RequestBody> params);
+
+
 
 }

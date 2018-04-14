@@ -1,5 +1,6 @@
 package com.qingmang.bank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
 import com.qingmang.adapter.HotBanksAdapter;
 import com.qingmang.adapter.HotCreditCardAdapter;
@@ -50,12 +52,26 @@ public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> imple
         LogManager.i("FindFragment-----");
         loadViewHelper.showLoading("");
         hotCreditCardAdapter = new HotCreditCardAdapter(creditCards);
+        hotCreditCardAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+            }
+        });
         rvHotBankcard.setLayoutManager(new LinearLayoutManager(mContext));
         rvHotBankcard.setAdapter(hotCreditCardAdapter);
 
 
         hotBanksAdapter = new HotBanksAdapter(banks);
         rvBank.setAdapter(hotBanksAdapter);
+        hotBanksAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent  = new Intent(mContext,HotBankInfoActivity.class);
+                intent.putExtra("id",banks.get(position).getId());
+                startActivity(intent);
+            }
+        });
         rvBank.setLayoutManager(new GridLayoutManager(mContext, 4));
         mPresenter.loadData();
         mPresenter.hotBanks();

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
+import com.qingmang.bank.BankCardListActivity;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.moudle.entity.CustomerInfo;
@@ -118,7 +119,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
     }
 
 
-    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf})
+    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf,R.id. rl_yhj})
     public void onViewClicked(View view) {
 //        if(!App.getInstance().isLogin()){
 //            startActivity(LoginActivity.class);
@@ -131,11 +132,16 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                 startActivity(intent);
                 break;
             case R.id.ll_rzqy:
-//                startActivity(AuthCompanyActivity.class);
+                startActivity(BankCardListActivity.class);
                 break;
             case R.id.rl_dzf:
 //                ((MainActivity) mContext).chooseTab(3);
                 break;
+            case R.id. rl_yhj:
+                startActivity(BankCardListActivity.class);
+                break;
         }
+
+
     }
 }
