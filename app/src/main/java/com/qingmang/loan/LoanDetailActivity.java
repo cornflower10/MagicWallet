@@ -163,7 +163,7 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
         tvLoanDetailRangeValue.setText(loanDetailEntity.getRateLower() + "");
 
         tvLoanDetailRepaymentValueRange.setText("额度范围" + loanDetailEntity.getLoanLower() + "元-" + loanDetailEntity.getLoanUpper() + "元");
-        tvLoanDetailLendingMonthRange.setText("期限范围" + loanDetailEntity.getTermLower() + "月-" + loanDetailEntity.getLoanUpper() + "月");
+        tvLoanDetailLendingMonthRange.setText("期限范围" + loanDetailEntity.getTermLower() + "月-" + loanDetailEntity.getTermUpper() + "月");
 
     }
 
