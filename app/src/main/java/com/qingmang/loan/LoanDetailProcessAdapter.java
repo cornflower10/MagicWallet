@@ -1,6 +1,7 @@
 package com.qingmang.loan;
 
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +22,8 @@ public class LoanDetailProcessAdapter extends BaseQuickAdapter<ProsList, BaseVie
 
     private static final Map<String, Integer> PROCESS;
 
+    private List<ProsList> data;
+
     static {
         PROCESS = new HashMap<>();
         PROCESS.put("ELI", R.drawable.apply_step1);
@@ -38,11 +41,19 @@ public class LoanDetailProcessAdapter extends BaseQuickAdapter<ProsList, BaseVie
 
     public LoanDetailProcessAdapter(int layoutResId, @Nullable List<ProsList> data) {
         super(layoutResId, data);
+        this.data = data;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, ProsList item) {
         helper.setText(R.id.tv_loan_detail_process_name, item.getName());
         Glide.with(mContext).load(PROCESS.get(item.getCode())).into((ImageView) helper.getView(R.id.iv_loan_detail_process_icon));
+
+        if ((item.getCode()).equals(data.get(data.size() - 1).getCode())) {
+            helper.getView(R.id.iv_loan_detail_process_right).setVisibility(View.GONE);
+        } else {
+            helper.getView(R.id.iv_loan_detail_process_right).setVisibility(View.VISIBLE);
+        }
+
     }
 }

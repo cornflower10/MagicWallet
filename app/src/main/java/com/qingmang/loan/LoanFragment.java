@@ -2,6 +2,7 @@ package com.qingmang.loan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -110,15 +111,25 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         srfLoan.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                getData(1, 20, null, false);
                 srfLoan.finishRefresh(2000, true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getData(1, 20, null, false);
+                    }
+                }, 2000);
             }
         });
         srfLoan.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                getData(1, 20, null, true);
                 srfLoan.finishLoadmore(2000, true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getData(1, 20, null, true);
+                    }
+                }, 2000);
             }
         });
     }

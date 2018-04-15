@@ -149,9 +149,9 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
         ImageLoaderUtil.getInstance().showImage(loanDetailEntity.getLogo(), ivLoanDetailIcon, R.mipmap.ic_launcher_round);
         tvDetailHighestValue.setText(loanDetailEntity.getLoanUpper() / 10000 + "");
         if (TextUtils.isEmpty(loanDetailEntity.getNumber())) {
-            tvManDetailAmountApply.setText("0");
+            tvManDetailAmount.setText("0人");
         } else {
-            tvManDetailAmountApply.setText(loanDetailEntity.getNumber());
+            tvManDetailAmount.setText(loanDetailEntity.getNumber() + "人");
         }
 
         lowLoan = loanDetailEntity.getLoanLower();
