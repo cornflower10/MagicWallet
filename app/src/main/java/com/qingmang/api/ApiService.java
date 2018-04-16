@@ -6,6 +6,7 @@ import com.qingmang.moudle.entity.BankCard;
 import com.qingmang.moudle.entity.BankInfo;
 import com.qingmang.moudle.entity.BaseEntity;
 import com.qingmang.moudle.entity.CreditCard;
+import com.qingmang.moudle.entity.CreditCardInfo;
 import com.qingmang.moudle.entity.CustomerInfo;
 
 import java.util.List;
@@ -113,6 +114,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("open/card/hot")
     Observable<BaseEntity<List<CreditCard>>> HotCreidtCard(@Field("pageSize") int pageSize
+    );
+
+
+    /**
+     * 热门信用卡详情
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("open/card/info")
+    Observable<BaseEntity<CreditCardInfo>> HotCreidtCardInfo(@Field("id") long id
     );
 
     /**

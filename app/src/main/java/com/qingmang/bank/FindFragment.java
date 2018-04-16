@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.qingmang.MainActivity;
 import com.qingmang.R;
 import com.qingmang.adapter.HotBanksAdapter;
 import com.qingmang.adapter.HotCreditCardAdapter;
@@ -56,7 +55,9 @@ public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> imple
         hotCreditCardAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ( (MainActivity)mContext).showToast("功能暂未开放！");
+                Intent intent  = new Intent(mContext,HotBankInfoActivity.class);
+                intent.putExtra("id",creditCards.get(position).getId());
+                startActivity(intent);
             }
         });
         rvHotBankcard.setLayoutManager(new LinearLayoutManager(mContext));
