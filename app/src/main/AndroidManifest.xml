@@ -52,7 +52,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".bank.BankCardAddActivity" />
-        <activity android:name=".bank.HotBankInfoActivity"></activity>
+        <activity android:name=".bank.HotBankInfoActivity" />
+        <activity android:name=".bank.CreditCardInfoActivity"></activity>
     </application>
 
 </manifest>

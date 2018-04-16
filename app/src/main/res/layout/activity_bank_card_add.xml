@@ -170,6 +170,7 @@
     <View style="@style/divide_line_match"/>
 
     <LinearLayout
+        android:paddingBottom="@dimen/margin_16"
         android:orientation="vertical"
         android:paddingLeft="36dp"
         android:paddingRight="36dp"
