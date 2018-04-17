@@ -39,4 +39,9 @@
     <string name="more">更多</string>
     <string name="hot_loan_message">据统计，申请三家以上的用户，99%都会拿到借款！</string>
     <string name="hot_loan_card">热门信用卡</string>
+    <string name="credit">信用卡</string>
+    <string name="debit">储蓄卡</string>
+    <string name="cashout_money">套现金额</string>
+    <string name="select_card">选择银行卡</string>
+    <string name="use_new_card_cashout">使用新卡套现</string>
 </resources>

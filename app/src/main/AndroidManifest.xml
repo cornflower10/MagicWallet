@@ -54,6 +54,7 @@
         <activity android:name=".bank.BankCardAddActivity" />
         <activity android:name=".bank.HotBankInfoActivity" />
         <activity android:name=".bank.CreditCardInfoActivity"></activity>
+        <activity android:name=".nocardcashout.NocardCashoutActivity" />
     </application>
 
 </manifest>
