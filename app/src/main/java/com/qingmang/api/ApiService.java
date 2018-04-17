@@ -151,6 +151,10 @@ public interface ApiService {
     Observable<BaseEntity<List<BankCard>>> BDCreditCards();
 
 
+    @GET(" member/bind/deposit/list")
+    Observable<BaseEntity<List<BankCard>>> BDDepositCards();
+
+
     @Multipart
     @POST("member/bind/credit")
     Observable<BaseEntity<String>> BdCreditCard(@Part("bankName") RequestBody bankName,

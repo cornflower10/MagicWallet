@@ -15,6 +15,7 @@ import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.moudle.entity.CustomerInfo;
 import com.qingmang.moudle.entity.UtilBox;
+import com.qingmang.nocardcashout.NocardCashoutActivity;
 import com.qingmang.user.adapter.UtilBoxAdapter;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
@@ -76,6 +77,27 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
             }
         });
 
+        utilBoxAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), NocardCashoutActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -88,7 +110,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
 
         Bundle args = new Bundle();
 
-      MyFragment fragment = new MyFragment();
+        MyFragment fragment = new MyFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -110,7 +132,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
         tvAmount.setText(String.valueOf(customerInfo.getLoanbalance()));
         tvYhj.setText(String.valueOf(customerInfo.getCreditnum()));
         tvDzf.setText(String.valueOf(customerInfo.getSmallchange()));
-        ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(),ivHeader, 0);
+        ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(), ivHeader, 0);
     }
 
     @Override
@@ -119,7 +141,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
     }
 
 
-    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf,R.id. rl_yhj})
+    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf, R.id.rl_yhj})
     public void onViewClicked(View view) {
 //        if(!App.getInstance().isLogin()){
 //            startActivity(LoginActivity.class);
@@ -128,7 +150,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
         switch (view.getId()) {
             case R.id.iv_setting:
                 Intent intent = new Intent(mContext, SettingActivity.class);
-                intent.putExtra("customerInfo",customerInfo);
+                intent.putExtra("customerInfo", customerInfo);
                 startActivity(intent);
                 break;
             case R.id.ll_rzqy:
@@ -137,7 +159,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
             case R.id.rl_dzf:
 //                ((MainActivity) mContext).chooseTab(3);
                 break;
-            case R.id. rl_yhj:
+            case R.id.rl_yhj:
                 startActivity(BankCardListActivity.class);
                 break;
         }
