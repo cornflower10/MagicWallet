@@ -6,6 +6,13 @@
              android:background="@android:color/white"
              android:orientation="vertical"
            >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
      <RelativeLayout
          android:layout_marginTop="@dimen/margin_16"
          android:layout_marginBottom="@dimen/margin_16"
@@ -71,5 +78,5 @@
          </LinearLayout>
      </RelativeLayout>
 
-
+    </FrameLayout>
 </LinearLayout>

@@ -55,7 +55,7 @@ public class FindFragment extends BaseMvpFragment<FindPresenter, FindView> imple
         hotCreditCardAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent  = new Intent(mContext,HotBankInfoActivity.class);
+                Intent intent  = new Intent(mContext,CreditCardInfoActivity.class);
                 intent.putExtra("id",creditCards.get(position).getId());
                 startActivity(intent);
             }
