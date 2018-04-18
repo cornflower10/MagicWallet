@@ -17,6 +17,7 @@ import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.moudle.entity.BankCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,14 +53,17 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
     @BindView(R.id.bsl_no_card_cash_out)
     BottomSheetLayout bslNoCardCashOut;
 
+    public static List<BankCard> creditCards = new ArrayList<>();
+    public static List<BankCard> debitCards = new ArrayList<>();
+
     @OnClick(R.id.ll_no_cash_credit)
     void llNoCashCreditOnclick() {
-        new SelectCardFragment().show(getSupportFragmentManager(), R.id.bsl_no_card_cash_out);
+        new SelectCardFragment(true).show(getSupportFragmentManager(), R.id.bsl_no_card_cash_out);
     }
 
     @OnClick(R.id.ll_no_cash_debit)
     void llNoCashDebitOnclick() {
-
+        new SelectCardFragment(false).show(getSupportFragmentManager(), R.id.bsl_no_card_cash_out);
     }
 
     @Override
@@ -79,12 +83,12 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
 
     @Override
     public void onSuccessDebitCard(List<BankCard> debitCards) {
-
+        this.debitCards = debitCards;
     }
 
     @Override
     public void onSuccessCreditCard(List<BankCard> creditCards) {
-
+        this.creditCards = creditCards;
     }
 
     @Override
@@ -100,6 +104,12 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
                 return new NocardCashoutPresenter();
             }
         });
+    }
+
+    @Override
+    public void onLoadFinished(Loader<NocardCashoutPresenter> loader, NocardCashoutPresenter data) {
+        super.onLoadFinished(loader, data);
+        presenter.loadCreditCard();
     }
 
     @Override
