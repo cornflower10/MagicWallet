@@ -54,6 +54,7 @@
                     android:id="@+id/tv_no_cash_credit_card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin"
                     android:layout_weight="1" />
 
                 <ImageView
@@ -111,6 +112,7 @@
                     android:id="@+id/tv_no_cash_debit_card"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin"
                     android:layout_weight="1" />
 
                 <ImageView

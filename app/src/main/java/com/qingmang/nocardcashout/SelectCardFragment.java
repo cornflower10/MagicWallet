@@ -8,12 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.flipboard.bottomsheet.commons.BottomSheetFragment;
 import com.qingmang.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -26,9 +30,20 @@ public class SelectCardFragment extends BottomSheetFragment {
     @BindView(R.id.rv_no_card_bank_card)
     RecyclerView rvNoCardBankCard;
     Unbinder unbinder;
-    private NocardCashoutAdapter loanAdapter;
+    @BindView(R.id.iv_no_card_cashout_close)
+    ImageView ivNoCardCashoutClose;
+
+    @OnClick(R.id.iv_no_card_cashout_close)
+    void ivNoCardCashoutCloseOnclick() {
+        dismiss();
+    }
+
+    private NocardCashoutAdapter nocardCashoutAdapter;
     private LinearLayoutManager linearLayoutManager;
     private boolean isCreditCard;
+
+    private TextView cardCreditCode;
+    private TextView cardDebitCode;
 
     @SuppressLint("ValidFragment")
     public SelectCardFragment(boolean isCreditCard) {
@@ -43,13 +58,30 @@ public class SelectCardFragment extends BottomSheetFragment {
 
         linearLayoutManager = new LinearLayoutManager(getActivity());
         if (isCreditCard) {
-            loanAdapter = new NocardCashoutAdapter(R.layout.item_no_card_cashout, NocardCashoutActivity.creditCards, isCreditCard);
+            nocardCashoutAdapter = new NocardCashoutAdapter(R.layout.item_no_card_cashout, NocardCashoutActivity.creditCards, isCreditCard);
         } else {
-            loanAdapter = new NocardCashoutAdapter(R.layout.item_no_card_cashout, NocardCashoutActivity.debitCards, isCreditCard);
+            nocardCashoutAdapter = new NocardCashoutAdapter(R.layout.item_no_card_cashout, NocardCashoutActivity.debitCards, isCreditCard);
         }
 
-        rvNoCardBankCard.setAdapter(loanAdapter);
+        rvNoCardBankCard.setAdapter(nocardCashoutAdapter);
         rvNoCardBankCard.setLayoutManager(linearLayoutManager);
+
+        cardCreditCode = (TextView) getActivity().findViewById(R.id.tv_no_cash_credit_card);
+        cardDebitCode = (TextView) getActivity().findViewById(R.id.tv_no_cash_debit_card);
+
+        nocardCashoutAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (isCreditCard) {
+                    cardCreditCode.setText(NocardCashoutActivity.creditCards.get(position).getCreditCode());
+                } else {
+                    cardDebitCode.setText(NocardCashoutActivity.debitCards.get(position).getBankCode());
+                }
+
+                dismiss();
+            }
+        });
+
         return view;
     }
 

@@ -28,7 +28,12 @@ public class NocardCashoutAdapter extends BaseQuickAdapter<BankCard, BaseViewHol
     protected void convert(BaseViewHolder helper, BankCard item) {
         helper.setText(R.id.tv_no_card_bank_name, item.getBankName());
         helper.setText(R.id.tv_no_card_type, isCreditCard ? "信用卡" : "储蓄卡");
-        helper.setText(R.id.tv_no_card_bank_code, "( " + item.getCreditCode().substring(item.getCreditCode().length() - 4) + " )");
+        if (isCreditCard) {
+            helper.setText(R.id.tv_no_card_bank_code, "( " + item.getCreditCode().substring(item.getCreditCode().length() - 4) + " )");
+        } else {
+            helper.setText(R.id.tv_no_card_bank_code, "( " + item.getBankCode().substring(item.getBankCode().length() - 4) + " )");
+        }
+
 
         switch (item.getBankName()) {
             case "中信银行":
