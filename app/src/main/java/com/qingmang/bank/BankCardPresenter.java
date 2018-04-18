@@ -38,4 +38,24 @@ public class BankCardPresenter extends BaseMvpPresenter<BankCardView> {
     }
 
 
+    public void loadDepositCards(){
+        addSubscribe(App.getInstance()
+                .getRetrofitServiceManager()
+                .create(ApiService.class)
+                .BDDepositCards()
+                .compose(ResponseTransformer.<List<BankCard>>handleResult())
+                .compose(RxSchedulers.<List<BankCard>>ObToMain())
+                .subscribe(new Consumer<List<BankCard>>() {
+                    @Override
+                    public void accept(List<BankCard> bankCards) throws Exception {
+                        getMvpView().onDataSuccess(bankCards);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onError(throwable.getMessage());
+                    }
+                }));
+    }
+
 }

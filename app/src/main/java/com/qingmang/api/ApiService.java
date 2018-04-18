@@ -151,8 +151,13 @@ public interface ApiService {
     Observable<BaseEntity<List<BankCard>>> BDCreditCards();
 
 
-    @GET(" member/bind/deposit/list")
+    @GET("member/bind/deposit/list")
     Observable<BaseEntity<List<BankCard>>> BDDepositCards();
+
+
+    @Multipart
+    @POST("member/bind/credit")
+    Observable<BaseEntity<String>> BdCreditCard2(@PartMap Map<String, RequestBody> params);
 
 
     @Multipart
@@ -160,17 +165,12 @@ public interface ApiService {
     Observable<BaseEntity<String>> BdCreditCard(@Part("bankName") RequestBody bankName,
                                                 @Part("creditcode") RequestBody creditcode,
                                                 @Part("ownerName") RequestBody ownerName,
-                                                @Part("creditLine") RequestBody creditLine,
+//                                                @Part("creditLine") RequestBody creditLine,
                                                 @Part("cvn2") RequestBody cvn2,
                                                 @Part("valiDate") RequestBody valiDate,
                                                 @Part("repayDate") RequestBody repayDate,
                                                 @Part MultipartBody.Part file
-                                                );
-
-
-    @Multipart
-    @POST("member/bind/credit")
-    Observable<BaseEntity<String>> BdCreditCard2(@PartMap Map<String, RequestBody> params);
+    );
 
 
 

@@ -37,6 +37,9 @@ public class ImageLoaderUtil implements ImageLoader {
 
     @Override
     public void showImage(String url, ImageView imageView, int defaultImage) {
+         if(null==url){
+             url="";
+         }
         imageLoader.showImage(url,imageView,defaultImage);
     }
 

@@ -2,11 +2,11 @@ package com.qingmang.bank;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.qingmang.R;
 import com.qingmang.adapter.BankCardAdapter;
@@ -29,14 +29,14 @@ public class BankCardListActivity extends BaseMvpActivity<BankCardPresenter, Ban
     @BindView(R.id.rv)
     RecyclerView rv;
     @BindView(R.id.ll_root)
-    LinearLayout llRoot;
+    NestedScrollView llRoot;
 
     private BankCardAdapter bankCardAdapter;
     private List<BankCard> bankCardList = new ArrayList<>();
 
     @Override
     public String setTitleName() {
-        return "银行卡";
+        return "信用卡";
     }
 
     @Override
@@ -82,6 +82,7 @@ public class BankCardListActivity extends BaseMvpActivity<BankCardPresenter, Ban
         bankCardAdapter =new BankCardAdapter(bankCardList);
         rv.setLayoutManager(new LinearLayoutManager(mContext));
         rv.setAdapter(bankCardAdapter);
+        rv.setNestedScrollingEnabled(false);
     }
 
     @OnClick({R.id.title_rightIv, R.id.iv_add})
