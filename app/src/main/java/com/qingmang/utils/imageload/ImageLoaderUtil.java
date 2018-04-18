@@ -59,6 +59,10 @@ public class ImageLoaderUtil implements ImageLoader {
     }
 
     @Override
+    public void loadLocalImage(File file, ImageView imageView, int defaultImage) {
+        imageLoader.loadLocalImage(file,imageView,defaultImage);
+    }
+    @Override
     public void loadCircleImage(String url, ImageView imageView, int defaultImage) {
         imageLoader.loadCircleImage(url,imageView,defaultImage);
     }

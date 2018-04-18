@@ -41,6 +41,13 @@ public class GlideLoad implements ImageLoader {
     }
 
     @Override
+    public void loadLocalImage(File file, ImageView imageView, int defaultImage) {
+        Glide.with( imageView.getContext() )
+                .load(file).error(defaultImage)
+                .into( imageView );
+    }
+
+    @Override
     public void loadCircleImage(String url, ImageView imageView, int defaultImage) {
         Glide.with( imageView.getContext() )
                 .load( url )
