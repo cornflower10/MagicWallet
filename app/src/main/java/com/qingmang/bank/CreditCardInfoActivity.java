@@ -41,7 +41,7 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
 
     @Override
     public String setTitleName() {
-        return null;
+        return "信用卡详情";
     }
 
     @Override
@@ -60,9 +60,38 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
         loadViewHelper.restore();
         ImageLoaderUtil.getInstance().showImage(creditCardInfo.getLogo(),ivCardBg,0);
         tvName.setText(creditCardInfo.getBankName());
+        tvCoinType.setText(coinType(creditCardInfo.getCurrency()));
+        tvType.setText(levelType(creditCardInfo.getLevel()));
+        tvCardType.setText(creditCardInfo.getAnnualFee());
+        tvDes.setText(creditCardInfo.getIntroduct());
 
     }
 
+    private String  coinType(String code){
+        if("rmb".equals(code)){
+            return "人民币";
+        }
+       else if("dollar".equals(code)){
+            return "外汇";
+        }
+        else if("rmbdollar".equals(code)){
+            return "人民币+外汇";
+        }
+        return "";
+    }
+
+    private String  levelType(String code){
+        if("ordinary".equals(code)){
+            return "普通卡";
+        }
+        else if("silver".equals(code)){
+            return "白金卡";
+        }
+        else if("golden".equals(code)){
+            return "金卡";
+        }
+        return "";
+    }
     @Override
     public void onApplySuccess(List<Bank> banks) {
 

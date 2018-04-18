@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <ImageView
-        android:src="@drawable/icon_my_zx"
+        android:src="@drawable/icon_safety"
         android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -179,26 +179,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <FrameLayout
-            android:background="@color/page_bg_color"
             android:layout_marginTop="@dimen/margin_16"
             android:layout_width="match_parent"
             android:layout_height="180dp">
             <ImageView
+                android:scaleType="centerCrop"
+                android:src="@drawable/add_credit_front"
                 android:layout_gravity="center"
                 android:id="@+id/iv_z"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
         <FrameLayout
-            android:background="@color/page_bg_color"
             android:layout_marginTop="@dimen/margin_16"
             android:layout_width="match_parent"
             android:layout_height="180dp">
             <ImageView
+                android:scaleType="centerCrop"
+                android:src="@drawable/add_credit_back"
                 android:layout_gravity="center"
                 android:id="@+id/iv_f"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
     </LinearLayout>
         <LinearLayout

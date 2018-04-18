@@ -26,7 +26,7 @@ public class BankCardAdapter extends BaseQuickAdapter<BankCard, BaseViewHolder> 
     @Override
     protected void convert(BaseViewHolder helper, BankCard item) {
         //http://livehaiyunx.oss-cn-shanghai.aliyuncs.com/picture/loan/bank/"+银行简称+".png
-        ImageLoaderUtil.getInstance().showImage(BuildConfig.BANK_LOGO+item.getBankName()+".png",(ImageView) helper.getView(R.id.iv_bank),0);
+        ImageLoaderUtil.getInstance().showImage(BuildConfig.BANK_LOGO+item.getBankName()+".png",(ImageView) helper.getView(R.id.iv_bank_icon),0);
         ImageLoaderUtil.getInstance().showImage(item.getCodeimg(),(ImageView) helper.getView(R.id.iv_bg),0);
        helper.setText(R.id.tv_bank_name,item.getBankName());
        helper.setText(R.id.tv_card_number,item.getCreditCode().substring(item.getCreditCode().length()-4,

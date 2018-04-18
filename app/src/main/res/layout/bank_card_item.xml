@@ -7,23 +7,28 @@
              android:orientation="vertical"
            >
     <FrameLayout
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
         android:layout_width="match_parent"
         android:layout_height="110dp">
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/iv_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
      <RelativeLayout
-         android:layout_marginTop="@dimen/margin_16"
-         android:layout_marginBottom="@dimen/margin_16"
-         android:layout_marginLeft="@dimen/margin_16"
+        android:padding="@dimen/margin_16"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content">
+         android:layout_height="match_parent">
          <ImageView
+             android:visibility="invisible"
              android:id="@+id/iv_bank_icon"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content" />
          <TextView
+             android:visibility="invisible"
+             android:textColor="@color/white"
              android:layout_marginLeft="4dp"
              android:layout_toRightOf="@+id/iv_bank_icon"
              android:text="交通银行"
@@ -32,6 +37,8 @@
              android:layout_height="wrap_content" />
 
          <TextView
+             android:visibility="invisible"
+             android:textColor="@color/white"
              android:id="@+id/tv_card_type"
              android:layout_marginLeft="4dp"
              android:layout_below="@+id/tv_bank_name"
@@ -51,24 +58,28 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content">
              <TextView
+                 android:textColor="@color/white"
                  android:textSize="@dimen/sp_16"
                  android:layout_weight="1"
                  android:text="****"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content" />
              <TextView
+                 android:textColor="@color/white"
                  android:textSize="@dimen/sp_16"
                  android:layout_weight="1"
                  android:text="****"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content" />
              <TextView
+                 android:textColor="@color/white"
                  android:textSize="@dimen/sp_16"
                  android:layout_weight="1"
                  android:text="****"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content" />
              <TextView
+                 android:textColor="@color/white"
                  android:id="@+id/tv_card_number"
                  android:textSize="@dimen/sp_16"
                  android:text="3507"
@@ -77,6 +88,5 @@
                  android:layout_height="wrap_content" />
          </LinearLayout>
      </RelativeLayout>
-
     </FrameLayout>
 </LinearLayout>
