@@ -128,6 +128,17 @@ public interface ApiService {
     );
 
     /**
+     * 申请信用卡
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/apply/card")
+    Observable<BaseEntity<String>> ApplyCreidtCard(@Field("cardId") long id
+    );
+
+
+    /**
      * 热门银行
      *
      * @return

@@ -45,10 +45,11 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_999999"
-                    android:text="等          级"
+                    android:text="等   级"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_level"
@@ -66,10 +67,11 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_999999"
-                    android:text="币          种"
+                    android:text="币   种"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_coin_type"
@@ -91,6 +93,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_ori"
@@ -112,6 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_date"
@@ -133,6 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_piont_rule"
@@ -194,6 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_year_fee"
@@ -215,6 +221,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_qxbl"
@@ -236,6 +243,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_qxfy"
@@ -257,6 +265,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/margin_16"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_low"
@@ -284,18 +293,138 @@
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/text_999999"
-                    android:text="新用户特权"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/text_999999"
+                        android:text="新用户特权"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 <TextView
                     android:layout_marginTop="10dp"
                     android:text="----"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/text_333333"
                     android:id="@+id/tv_new_people"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View style="@style/divide_line_match"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/text_999999"
+                        android:text="卡片额度"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <com.qingmang.customview.LevelView
+                        android:id="@+id/lv_ed"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        app:leavelCount="5"
+                    </com.qingmang.customview.LevelView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="----"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/text_333333"
+                    android:id="@+id/tv_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View style="@style/divide_line_match"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/text_999999"
+                        android:text="批卡概率"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <com.qingmang.customview.LevelView
+                        android:id="@+id/lv_gl"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        app:leavelCount="5"
+                    </com.qingmang.customview.LevelView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="----"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/text_333333"
+                    android:id="@+id/tv_gl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View style="@style/divide_line_match"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/margin_16"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv4"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/text_999999"
+                        android:text="填表易度"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <com.qingmang.customview.LevelView
+                        android:id="@+id/lv_yd"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        app:leavelCount="5"
+                    </com.qingmang.customview.LevelView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="----"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/text_333333"
+                    android:id="@+id/tv_yd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

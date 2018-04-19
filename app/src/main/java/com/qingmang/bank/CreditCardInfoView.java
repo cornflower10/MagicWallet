@@ -5,11 +5,8 @@ package com.qingmang.bank;
  */
 
 import com.qingmang.base.BaseView;
-import com.qingmang.moudle.entity.Bank;
-
-import java.util.List;
 
 public interface CreditCardInfoView<D> extends BaseView{
     void onDataSuccess(D d);
-    void onApplySuccess(List<Bank> banks);
+    void onApplySuccess(String s);
 }
