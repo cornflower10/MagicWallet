@@ -20,12 +20,16 @@ public class CustomerInfo implements Serializable{
      * phoneModel : kupai8675
      * province : 江苏
      * city : 苏州
+     * district : 相城区
      * address : null
      * token : d19fe3f49b8f4a9a8829acf80f5c5407
      * ip : 127.0.0.1
      * state : active
      * number : 1
      * platNum : 4
+     * creditnum : 3
+     * loanbalance : 0
+     * smallchange : 0
      * merchantId : 32083001127239
      * auditFlag : 1
      * merchantFlag : 1
@@ -48,12 +52,16 @@ public class CustomerInfo implements Serializable{
     private String phoneModel;
     private String province;
     private String city;
+    private String district;
     private String address;
     private String token;
     private String ip;
     private String state;
     private int number;
     private int platNum;
+    private int creditnum;
+    private int loanbalance;
+    private int smallchange;
     private String merchantId;
     private String auditFlag;
     private String merchantFlag;
@@ -63,10 +71,6 @@ public class CustomerInfo implements Serializable{
     private String realname;
     private String email;
     private String idCard;
-    private int creditnum;
-
-    private double loanbalance;
-    private double smallchange;
 
     public int getId() {
         return id;
@@ -156,6 +160,14 @@ public class CustomerInfo implements Serializable{
         this.city = city;
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -202,6 +214,30 @@ public class CustomerInfo implements Serializable{
 
     public void setPlatNum(int platNum) {
         this.platNum = platNum;
+    }
+
+    public int getCreditnum() {
+        return creditnum;
+    }
+
+    public void setCreditnum(int creditnum) {
+        this.creditnum = creditnum;
+    }
+
+    public int getLoanbalance() {
+        return loanbalance;
+    }
+
+    public void setLoanbalance(int loanbalance) {
+        this.loanbalance = loanbalance;
+    }
+
+    public int getSmallchange() {
+        return smallchange;
+    }
+
+    public void setSmallchange(int smallchange) {
+        this.smallchange = smallchange;
     }
 
     public String getMerchantId() {
@@ -274,29 +310,5 @@ public class CustomerInfo implements Serializable{
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
-    }
-
-    public int getCreditnum() {
-        return creditnum;
-    }
-
-    public void setCreditnum(int creditnum) {
-        this.creditnum = creditnum;
-    }
-
-    public double getLoanbalance() {
-        return loanbalance;
-    }
-
-    public void setLoanbalance(double loanbalance) {
-        this.loanbalance = loanbalance;
-    }
-
-    public double getSmallchange() {
-        return smallchange;
-    }
-
-    public void setSmallchange(double smallchange) {
-        this.smallchange = smallchange;
     }
 }

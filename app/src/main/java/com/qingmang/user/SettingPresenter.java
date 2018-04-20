@@ -30,6 +30,7 @@ public class SettingPresenter extends BaseMvpPresenter<SettingView> {
                            File file,
                            String province,
                            String city,
+                           String district,
                            String address,
                            String workstate,
                            String income,
@@ -50,7 +51,7 @@ public class SettingPresenter extends BaseMvpPresenter<SettingView> {
         }
 
         RequestBody nameRequest = null,
-                provinceRequest= null,cityR= null,
+                provinceRequest= null,cityR= null,districtR = null,
                 addressR= null,workStateR=null,incomeR=null,unitnameR =null,
                 realnameR= null,idcardR= null,emailR = null;
 
@@ -69,6 +70,12 @@ public class SettingPresenter extends BaseMvpPresenter<SettingView> {
             cityR =
                     RequestBody.create(
                             MediaType.parse("multipart/form-data"), city);
+        }
+
+        if(!TextUtils.isEmpty(district)){
+            districtR =
+                    RequestBody.create(
+                            MediaType.parse("multipart/form-data"), district);
         }
 
         if(!TextUtils.isEmpty(address)){
@@ -115,6 +122,7 @@ public class SettingPresenter extends BaseMvpPresenter<SettingView> {
                         body,
                         provinceRequest,
                         cityR,
+                        districtR,
                         addressR,
                         workStateR,
                         incomeR,

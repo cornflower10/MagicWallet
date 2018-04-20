@@ -93,6 +93,7 @@ public interface ApiService {
                                                   @Part MultipartBody.Part file,
                                                   @Part("province") RequestBody province,
                                                   @Part("city") RequestBody city,
+                                                  @Part("district") RequestBody district,
                                                   @Part("address") RequestBody address,
 
                                                   @Part("workstate") RequestBody workstate,

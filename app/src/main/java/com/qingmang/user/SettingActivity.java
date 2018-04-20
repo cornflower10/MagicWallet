@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -17,17 +21,21 @@ import com.lljjcoder.bean.ProvinceBean;
 import com.lljjcoder.citywheel.CityConfig;
 import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.qingmang.R;
+import com.qingmang.adapter.StringAdapter;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.baselibrary.utils.ValUtils;
+import com.qingmang.customview.CusomBottomSheet;
 import com.qingmang.moudle.entity.CustomerInfo;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,8 +76,11 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
     private CustomerInfo customerInfo;
 
     public static final String FROM_UPDATE = "SettingActivity";
+    private static final String[] status = {"在职", "待业"};
+    private static final String[] incomeRange = {"0~2000", "2000~6000", "6000~10000", "10000~20000", "20000以上"};
     private File imageFile;
     CityPickerView mCityPickerView = new CityPickerView();
+
     @Override
     public String setTitleName() {
         return "基础信息认证";
@@ -85,6 +96,12 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
         return R.layout.activity_setting;
     }
 
+    private CusomBottomSheet cusomBottomSheet;
+    private RecyclerView recyclerView;
+
+    private CusomBottomSheet inComeBottomSheet;
+    private RecyclerView incomeRecycleView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +113,9 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
             tvName.setText(customerInfo.getName());
             tvPhone.setText(customerInfo.getPhone());
             if (!TextUtils.isEmpty(customerInfo.getProvince()))
-                tvAlwaysAddress.setText(customerInfo.getProvince() + "," + customerInfo.getCity());
+                tvAlwaysAddress.setText(customerInfo.getProvince() + "," +
+                        customerInfo.getCity() + "," +
+                        customerInfo.getDistrict());
             tvPlaceDetail.setText(customerInfo.getAddress());
             etIdCard.setText(customerInfo.getIdCard());
             etRealName.setText(customerInfo.getRealname());
@@ -105,10 +124,44 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
             tvWork.setText(customerInfo.getWorkstate());
             tvCommpanyName.setText(customerInfo.getUnitname());
         }
+
+        cusomBottomSheet = new CusomBottomSheet(mContext);
+        View workStatusDialogView = LayoutInflater.from(mContext).inflate(R.layout.bottom_sheet, null);
+        recyclerView = (RecyclerView) workStatusDialogView.findViewById(R.id.rv);
+        final List<String> list = Arrays.asList(status);
+        StringAdapter stringAdapter = new StringAdapter(list);
+        stringAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                tvWork.setText(list.get(position));
+                cusomBottomSheet.dismissSheet();
+            }
+        });
+        recyclerView.setAdapter(stringAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        cusomBottomSheet.setContentView(workStatusDialogView);
+
+
+        inComeBottomSheet = new CusomBottomSheet(mContext);
+        View incomeDialogView = LayoutInflater.from(mContext).inflate(R.layout.bottom_sheet, null);
+        incomeRecycleView = (RecyclerView) incomeDialogView.findViewById(R.id.rv);
+        final List<String> incomeList = Arrays.asList(incomeRange);
+        StringAdapter incomeAdapter = new StringAdapter(incomeList);
+        incomeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                tvIncome.setText(incomeList.get(position));
+                inComeBottomSheet.dismissSheet();
+            }
+        });
+        incomeRecycleView.setAdapter(incomeAdapter);
+        incomeRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
+        inComeBottomSheet.setContentView(incomeDialogView);
     }
 
     @Override
     public void onDataSuccess(String s) {
+        stopProgressDialog();
         showToast("修改成功");
         finish();
     }
@@ -123,11 +176,11 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
         });
     }
 
-    @OnClick({R.id.tv_always_address,R.id.bt_commit})
+    @OnClick({R.id.tv_always_address, R.id.bt_commit,R.id.tv_work, R.id.tv_income})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_always_address:
-               initWheel();
+                initWheel();
                 break;
             case R.id.tv_place:
                 initWheel();
@@ -137,55 +190,67 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
 //                intent.putExtra(FROM_UPDATE,true);
 //                startActivity(intent);
 //                break;
+
+            case R.id.tv_work:
+                cusomBottomSheet.showSheet();
+                break;
+            case R.id.tv_income:
+                inComeBottomSheet.showSheet();
+                break;
+
             case R.id.bt_commit:
 
                 String idCard = etIdCard.getText().toString();
-                if(!TextUtils.isEmpty(idCard)){
-                    if(!ValUtils.isIdNo(idCard)){
+                if (!TextUtils.isEmpty(idCard)) {
+                    if (!ValUtils.isIdNo(idCard)) {
                         showToast("身份证格式有误！");
                         return;
                     }
                 }
                 String email = etEmail.getText().toString();
-                if(!TextUtils.isEmpty(email)){
-                    if(!ValUtils.isMailbox(email)){
+                if (!TextUtils.isEmpty(email)) {
+                    if (!ValUtils.isMailbox(email)) {
                         showToast("邮箱格式有误！");
                         return;
                     }
                 }
                 String place = tvAlwaysAddress.getText().toString();
-                String province = null, city=null ,areas=null;
-                if(!TextUtils.isEmpty(place)){
-                    String [] strs=   place.split(",");
+                String province = null, city = null, areas = null;
+                if (!TextUtils.isEmpty(place)) {
+                    String[] strs = place.split(",");
                     province = strs[0];
                     city = strs[1];
                     areas = strs[2];
                 }
 //
-//                startProgressDialog();
-//                presenter.updateInfo(tvName.getText().toString(),
-//                        imageFile,province,city,areas,tvPlaceDetail.getText().toString(),
-//                        etRealName.getText().toString(),idCard,etEmail.getText().toString());
+                startProgressDialog();
+                presenter.updateInfo(tvName.getText().toString(),
+                        imageFile, province, city, areas, tvPlaceDetail.getText().toString(),
+                        tvWork.getText().toString(),
+                        tvIncome.getText().toString(),
+                        tvCommpanyName.getText().toString(),
+                        etRealName.getText().toString(), idCard, etEmail.getText().toString());
                 break;
         }
     }
 //     CityPickerView  mCityPickerView = new CityPickerView();
 //
+
     /**
      * 弹出选择器
      */
     private void initWheel() {
         CityConfig cityConfig = null;
         String place = tvAlwaysAddress.getText().toString();
-        String province = null, city=null ,areas=null;
-        if(!TextUtils.isEmpty(place)){
-            String [] strs=   place.split(",");
+        String province = null, city = null, areas = null;
+        if (!TextUtils.isEmpty(place)) {
+            String[] strs = place.split(",");
             province = strs[0];
             city = strs[1];
             areas = strs[2];
         }
-        if (!TextUtils.isEmpty(province)&&!TextUtils.isEmpty(city)
-                &&!TextUtils.isEmpty(areas)) {
+        if (!TextUtils.isEmpty(province) && !TextUtils.isEmpty(city)
+                && !TextUtils.isEmpty(areas)) {
             cityConfig = new CityConfig.Builder().title("选择城市")
                     .province(province)
                     .city(city)
