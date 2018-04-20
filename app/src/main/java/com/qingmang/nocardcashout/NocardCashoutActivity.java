@@ -52,6 +52,20 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
     LinearLayout llNoCashDebit;
     @BindView(R.id.bsl_no_card_cash_out)
     BottomSheetLayout bslNoCardCashOut;
+    @BindView(R.id.tv_no_card_cashout_confirm)
+    TextView tvNoCardCashoutConfirm;
+    @BindView(R.id.tv_no_card_cashout_cancel)
+    TextView tvNoCardCashoutCancel;
+
+    @OnClick(R.id.tv_no_card_cashout_confirm)
+    void tvNoCardCashoutConfirmOnclick() {
+        presenter.apply();
+    }
+
+    @OnClick(R.id.tv_no_card_cashout_cancel)
+    void tvNoCardCashoutCancelOnclick() {
+        finish();
+    }
 
     public static List<BankCard> creditCards = new ArrayList<>();
     public static List<BankCard> debitCards = new ArrayList<>();

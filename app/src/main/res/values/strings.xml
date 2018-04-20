@@ -45,4 +45,6 @@
     <string name="select_card">选择银行卡</string>
     <string name="use_new_card_cashout">使用新卡套现</string>
     <string name="no_card_cashout_tip">银行级信息安全防护，不以任何形式泄露用户信息，严格保护用户隐私数据</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
 </resources>
