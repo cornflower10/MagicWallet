@@ -3,15 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MagicWallet.iml" filepath="$PROJECT_DIR$/.idea/MagicWallet.iml" />
-      <module fileurl="file://D:\cornflower\projectDemo\project\QingMang\.idea\QingMang.iml" filepath="D:\cornflower\projectDemo\project\QingMang\.idea\QingMang.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../QingMang/QingMang.iml" filepath="$PROJECT_DIR$/../../QingMang/QingMang.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:/QingMang/QingMang.iml" filepath="D:/QingMang/QingMang.iml" />
+      <module fileurl="file://D:/cornflower/projectDemo/project/QingMang/.idea/QingMang.iml" filepath="D:/cornflower/projectDemo/project/QingMang/.idea/QingMang.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
-      <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
-      <module fileurl="file://$PROJECT_DIR$/uilibrary/uilibrary.iml" filepath="$PROJECT_DIR$/uilibrary/uilibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/uilibrary/uilibrary.iml" filepath="$PROJECT_DIR$/uilibrary/uilibrary.iml" />
     </modules>
   </component>
