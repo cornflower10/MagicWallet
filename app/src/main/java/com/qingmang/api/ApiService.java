@@ -87,23 +87,21 @@ public interface ApiService {
     );
 
 
-
     @Multipart
     @POST("member/info/update")
     Observable<BaseEntity<String>> UpdateCustomer(@Part("name") RequestBody name,
-                                                   @Part MultipartBody.Part file,
-                                                   @Part("province") RequestBody province,
-                                                   @Part("city") RequestBody city,
-                                                   @Part("address") RequestBody address,
+                                                  @Part MultipartBody.Part file,
+                                                  @Part("province") RequestBody province,
+                                                  @Part("city") RequestBody city,
+                                                  @Part("address") RequestBody address,
 
-                                                   @Part("workstate") RequestBody workstate,
-                                                   @Part("income") RequestBody income,
-                                                   @Part("unitname") RequestBody unitname,
+                                                  @Part("workstate") RequestBody workstate,
+                                                  @Part("income") RequestBody income,
+                                                  @Part("unitname") RequestBody unitname,
 
-                                                   @Part("realname") RequestBody realname,
-                                                   @Part("idcard") RequestBody idcard,
-                                                   @Part("email") RequestBody email);
-
+                                                  @Part("realname") RequestBody realname,
+                                                  @Part("idcard") RequestBody idcard,
+                                                  @Part("email") RequestBody email);
 
 
     /**
@@ -157,7 +155,6 @@ public interface ApiService {
     Observable<BaseEntity<BankInfo>> HotBankInfo(@Field("id") long id);
 
 
-
     @GET("member/bind/credit/list")
     Observable<BaseEntity<List<BankCard>>> BDCreditCards();
 
@@ -170,6 +167,9 @@ public interface ApiService {
     @POST("member/bind/credit")
     Observable<BaseEntity<String>> BdCreditCard2(@PartMap Map<String, RequestBody> params);
 
+    @Multipart
+    @POST("member/bind/deposit")
+    Observable<BaseEntity<String>> bdDebitCard(@PartMap Map<String, RequestBody> params);
 
     @Multipart
     @POST("member/bind/credit")
@@ -182,7 +182,6 @@ public interface ApiService {
                                                 @Part("repayDate") RequestBody repayDate,
                                                 @Part MultipartBody.Part file
     );
-
 
 
 }

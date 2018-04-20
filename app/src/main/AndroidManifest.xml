@@ -51,18 +51,27 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".bank.BankCardAddActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".bank.HotBankInfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".bank.CreditCardInfoNextActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".bank.CreditCardInfoActivity"
+        <activity
+            android:name=".bank.BankCardAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bank.HotBankInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bank.CreditCardInfoNextActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bank.CreditCardInfoActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".bank.DebitCardListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".nocardcashout.NocardCashoutActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".bank.DebitCardListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nocardcashout.NocardCashoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bank.DebitAddActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

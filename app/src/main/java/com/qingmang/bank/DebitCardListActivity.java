@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.qingmang.R;
-import com.qingmang.adapter.BankCardAdapter;
+import com.qingmang.adapter.BankDebitCardAdapter;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
@@ -31,7 +31,7 @@ public class DebitCardListActivity extends BaseMvpActivity<BankCardPresenter, Ba
     @BindView(R.id.ll_root)
     NestedScrollView llRoot;
 
-    private BankCardAdapter bankCardAdapter;
+    private BankDebitCardAdapter bankCardAdapter;
     private List<BankCard> bankCardList = new ArrayList<>();
 
     @Override
@@ -79,7 +79,7 @@ public class DebitCardListActivity extends BaseMvpActivity<BankCardPresenter, Ba
         titleRightIv.setBackgroundResource(R.drawable.ic_add_black_24dp);
         loadViewHelper.showLoading("");
         presenter.loadDepositCards();
-        bankCardAdapter =new BankCardAdapter(bankCardList);
+        bankCardAdapter = new BankDebitCardAdapter(bankCardList);
         rv.setLayoutManager(new LinearLayoutManager(mContext));
         rv.setAdapter(bankCardAdapter);
         rv.setNestedScrollingEnabled(false);
@@ -89,10 +89,10 @@ public class DebitCardListActivity extends BaseMvpActivity<BankCardPresenter, Ba
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_rightIv:
-                startActivity(BankCardAddActivity.class);
+                startActivity(DebitAddActivity.class);
                 break;
             case R.id.iv_add:
-                startActivity(BankCardAddActivity.class);
+                startActivity(DebitAddActivity.class);
                 break;
         }
     }

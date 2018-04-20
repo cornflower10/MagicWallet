@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
 import com.qingmang.bank.BankCardListActivity;
+import com.qingmang.bank.DebitCardListActivity;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.moudle.entity.CustomerInfo;
@@ -93,7 +94,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                         startActivity(intent);
                         break;
                     case 3:
-//                        startActivity(DebitCardListActivity.class);
+                        startActivity(DebitCardListActivity.class);
                         break;
                     case 4:
                         startActivity(BankCardListActivity.class);
