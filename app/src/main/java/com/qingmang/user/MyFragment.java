@@ -63,8 +63,10 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
         utilBoxes.add(new UtilBox(1, "征信", R.drawable.icon_my_zx));
         utilBoxes.add(new UtilBox(2, "公积金", R.drawable.icon_my_gjj));
         utilBoxes.add(new UtilBox(3, "无卡套现", R.drawable.icon_my_wktx));
-        utilBoxes.add(new UtilBox(4, "信用卡自动还款", R.drawable.icon_my_zdhk));
-        utilBoxes.add(new UtilBox(5, "信用卡自动查询", R.drawable.icon_my_jdcx));
+        utilBoxes.add(new UtilBox(4, "绑定储蓄卡", R.drawable.icon_my_wktx));
+        utilBoxes.add(new UtilBox(5, "绑定信用卡", R.drawable.icon_my_wktx));
+        utilBoxes.add(new UtilBox(6, "信用卡自动还款", R.drawable.icon_my_zdhk));
+        utilBoxes.add(new UtilBox(7, "信用卡自动查询", R.drawable.icon_my_jdcx));
 
         utilBoxAdapter = new UtilBoxAdapter(utilBoxes);
         rv.setAdapter(utilBoxAdapter);
@@ -91,8 +93,10 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                         startActivity(intent);
                         break;
                     case 3:
+//                        startActivity(DebitCardListActivity.class);
                         break;
                     case 4:
+                        startActivity(BankCardListActivity.class);
                         break;
                 }
             }
