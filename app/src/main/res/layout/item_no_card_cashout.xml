@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/iv_card_cashout_logo"
-            android:layout_width="@dimen/loan_icon_normal_tip"
-            android:layout_height="@dimen/loan_icon_normal_tip" />
+            android:layout_width="@dimen/loan_icon_normal_tip_big"
+            android:layout_height="@dimen/loan_icon_normal_tip_big" />
 
         <TextView
             android:id="@+id/tv_no_card_bank_name"
@@ -32,6 +32,8 @@
             android:layout_marginLeft="@dimen/loan_default_margin" />
     </LinearLayout>
 
-    <View style="@style/HorizontalLine" />
+    <View
+        style="@style/HorizontalLine"
+        android:layout_marginTop="@dimen/loan_default_margin_small" />
 
 </LinearLayout>

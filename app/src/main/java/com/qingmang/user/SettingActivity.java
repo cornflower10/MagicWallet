@@ -10,12 +10,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lljjcoder.Interface.OnCityItemClickListener;
+import com.lljjcoder.bean.CityBean;
+import com.lljjcoder.bean.DistrictBean;
+import com.lljjcoder.bean.ProvinceBean;
+import com.lljjcoder.citywheel.CityConfig;
+import com.lljjcoder.style.citypickerview.CityPickerView;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.baselibrary.utils.LogManager;
+import com.qingmang.baselibrary.utils.ValUtils;
 import com.qingmang.moudle.entity.CustomerInfo;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
@@ -62,7 +69,7 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
 
     public static final String FROM_UPDATE = "SettingActivity";
     private File imageFile;
-
+    CityPickerView mCityPickerView = new CityPickerView();
     @Override
     public String setTitleName() {
         return "基础信息认证";
@@ -81,7 +88,7 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mCityPickerView.init(mContext);
+        mCityPickerView.init(mContext);
         customerInfo = (CustomerInfo) getIntent().getSerializableExtra("customerInfo");
         if (null != customerInfo) {
             ImageLoaderUtil.getInstance().loadCircleImage(customerInfo.getAvatar(), ivHeader, 0);
@@ -116,115 +123,111 @@ public class SettingActivity extends BaseMvpActivity<SettingPresenter, SettingVi
         });
     }
 
-//    @OnClick({R.id.tv_always_address,R.id.bt_commit})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.tv_always_address:
-////                startActivity(AddressListActivity.class);
+    @OnClick({R.id.tv_always_address,R.id.bt_commit})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_always_address:
+               initWheel();
+                break;
+            case R.id.tv_place:
+                initWheel();
+                break;
+//            case R.id.tv_update_passwd:
+//                Intent intent =new Intent(mContext,ForgetPasswdActivity.class);
+//                intent.putExtra(FROM_UPDATE,true);
+//                startActivity(intent);
 //                break;
-////            case R.id.tv_place:
-////                initWheel();
-////                break;
-////            case R.id.tv_update_passwd:
-////                Intent intent =new Intent(mContext,ForgetPasswdActivity.class);
-////                intent.putExtra(FROM_UPDATE,true);
-////                startActivity(intent);
-////                break;
-//            case R.id.bt_commit:
-//
-//                String idCard = etIdCard.getText().toString();
-//                if(!TextUtils.isEmpty(idCard)){
-//                    if(!ValUtils.isIdNo(idCard)){
-//                        showToast("身份证格式有误！");
-//                        return;
-//                    }
-//                }
-//                String email = etEmail.getText().toString();
-//                if(!TextUtils.isEmpty(email)){
-//                    if(!ValUtils.isMailbox(email)){
-//                        showToast("邮箱格式有误！");
-//                        return;
-//                    }
-//                }
-//                String place = tvPlace.getText().toString();
-//                String province = null, city=null ,areas=null;
-//                if(!TextUtils.isEmpty(place)){
-//                    String [] strs=   place.split(",");
-//                    province = strs[0];
-//                    city = strs[1];
-//                    areas = strs[2];
-//                }
+            case R.id.bt_commit:
+
+                String idCard = etIdCard.getText().toString();
+                if(!TextUtils.isEmpty(idCard)){
+                    if(!ValUtils.isIdNo(idCard)){
+                        showToast("身份证格式有误！");
+                        return;
+                    }
+                }
+                String email = etEmail.getText().toString();
+                if(!TextUtils.isEmpty(email)){
+                    if(!ValUtils.isMailbox(email)){
+                        showToast("邮箱格式有误！");
+                        return;
+                    }
+                }
+                String place = tvAlwaysAddress.getText().toString();
+                String province = null, city=null ,areas=null;
+                if(!TextUtils.isEmpty(place)){
+                    String [] strs=   place.split(",");
+                    province = strs[0];
+                    city = strs[1];
+                    areas = strs[2];
+                }
 //
 //                startProgressDialog();
 //                presenter.updateInfo(tvName.getText().toString(),
 //                        imageFile,province,city,areas,tvPlaceDetail.getText().toString(),
 //                        etRealName.getText().toString(),idCard,etEmail.getText().toString());
-//                break;
-//        }
-//    }
+                break;
+        }
+    }
 //     CityPickerView  mCityPickerView = new CityPickerView();
 //
-//    /**
-//     * 弹出选择器
-//     */
-//    private void initWheel() {
-//        CityConfig cityConfig = null;
-//        String place = tvPlace.getText().toString();
-//        String province = null, city=null ,areas=null;
-//        if(!TextUtils.isEmpty(place)){
-//            String [] strs=   place.split(",");
-//            province = strs[0];
-//            city = strs[1];
-//            areas = strs[2];
-//        }
-//        if (!TextUtils.isEmpty(province)&&!TextUtils.isEmpty(city)
-//                &&!TextUtils.isEmpty(areas)) {
-//            cityConfig = new CityConfig.Builder().title("选择城市")
-//                    .province(province)
-//                    .city(city)
-//                    .district(city)
-//                    .build();
-//        } else {
-//            cityConfig = new CityConfig.Builder().title("选择城市")//标题
-//                    .build();
-//        }
-//
-//
-//        mCityPickerView.setConfig(cityConfig);
-//        mCityPickerView.setOnCityItemClickListener(new OnCityItemClickListener() {
-//            @Override
-//            public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
-//                StringBuilder sb = new StringBuilder();
-//                if (province != null) {
-//                    sb.append(province.getName() + ",");
-//                }
-//
-//                if (city != null) {
-//                    sb.append(city.getName() + ",");
-//                }
-//
-//                if (district != null) {
-//                    sb.append(district.getName());
-//                }
-//
-//                tvPlace.setText("" + sb.toString());
-//
-//            }
-//
-//            @Override
-//            public void onCancel() {
-////                ToastUtils.showLongToast(CitypickerWheelActivity.this, "已取消");
-//            }
-//        });
-//        mCityPickerView.showCityPicker();
+    /**
+     * 弹出选择器
+     */
+    private void initWheel() {
+        CityConfig cityConfig = null;
+        String place = tvAlwaysAddress.getText().toString();
+        String province = null, city=null ,areas=null;
+        if(!TextUtils.isEmpty(place)){
+            String [] strs=   place.split(",");
+            province = strs[0];
+            city = strs[1];
+            areas = strs[2];
+        }
+        if (!TextUtils.isEmpty(province)&&!TextUtils.isEmpty(city)
+                &&!TextUtils.isEmpty(areas)) {
+            cityConfig = new CityConfig.Builder().title("选择城市")
+                    .province(province)
+                    .city(city)
+                    .district(city)
+                    .build();
+        } else {
+            cityConfig = new CityConfig.Builder().title("选择城市")//标题
+                    .build();
+        }
 
-//    }
+
+        mCityPickerView.setConfig(cityConfig);
+        mCityPickerView.setOnCityItemClickListener(new OnCityItemClickListener() {
+            @Override
+            public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
+                StringBuilder sb = new StringBuilder();
+                if (province != null) {
+                    sb.append(province.getName() + ",");
+                }
+
+                if (city != null) {
+                    sb.append(city.getName() + ",");
+                }
+
+                if (district != null) {
+                    sb.append(district.getName());
+                }
+
+                tvAlwaysAddress.setText("" + sb.toString());
+
+            }
+
+            @Override
+            public void onCancel() {
+//                ToastUtils.showLongToast(CitypickerWheelActivity.this, "已取消");
+            }
+        });
+        mCityPickerView.showCityPicker();
+
+    }
 
     private void ChooseImages() {
-//        Intent toGallery = new Intent(Intent.ACTION_PICK);
-//        toGallery.setType("image/*");
-////        toGallery.addCategory(Intent.CATEGORY_OPENABLE);
-//        startActivityForResult(toGallery, REQUEST_GALLERY);
         PhotoPicker.builder()
                 .setPhotoCount(1)
                 .setShowCamera(true)

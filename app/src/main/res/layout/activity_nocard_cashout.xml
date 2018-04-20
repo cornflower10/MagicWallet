@@ -11,95 +11,117 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/loan_default_margin"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:padding="@dimen/loan_default_padding">
-
-        <LinearLayout
-            android:id="@+id/ll_no_cash_credit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/loan_default_padding">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/credit"
-                android:textColor="@color/loan_name" />
-
-            <TextView
-                android:id="@+id/tv_no_cash_credit_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_more" />
-        </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/loan_default_padding">
+            android:layout_marginTop="@dimen/loan_default_margin"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/loan_default_padding_big">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cashout_money"
-                android:textColor="@color/loan_name" />
+                android:layout_margin="@dimen/loan_default_margin">
 
-            <EditText
-                android:id="@+id/rt_no_cash_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_safety" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin_small"
+                    android:text="@string/no_card_cashout_tip"
+                    android:textSize="@dimen/loan_nature" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_no_cash_credit"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/loan_detail_repayment_value_unit"
-                android:textColor="@color/loan_name" />
+                android:gravity="center_vertical"
+                android:padding="@dimen/loan_default_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/credit"
+                    android:textColor="@color/loan_name" />
+
+                <TextView
+                    android:id="@+id/tv_no_cash_credit_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_more" />
+            </LinearLayout>
+
+            <View style="@style/HorizontalLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="@dimen/loan_default_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cashout_money"
+                    android:textColor="@color/loan_name" />
+
+                <EditText
+                    android:id="@+id/rt_no_cash_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin_small"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:inputType="number" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loan_detail_repayment_value_unit"
+                    android:textColor="@color/loan_name" />
+            </LinearLayout>
+
+            <View style="@style/HorizontalLine" />
+
+            <LinearLayout
+                android:id="@+id/ll_no_cash_debit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="@dimen/loan_default_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/debit"
+                    android:textColor="@color/loan_name" />
+
+                <TextView
+                    android:id="@+id/tv_no_cash_debit_card"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/loan_default_margin"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_more" />
+            </LinearLayout>
+
+            <View style="@style/HorizontalLine" />
         </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
-
-        <LinearLayout
-            android:id="@+id/ll_no_cash_debit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/loan_default_padding">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/debit"
-                android:textColor="@color/loan_name" />
-
-            <TextView
-                android:id="@+id/tv_no_cash_debit_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_more" />
-        </LinearLayout>
-
-        <View style="@style/HorizontalLine" />
-    </LinearLayout>
     </com.flipboard.bottomsheet.BottomSheetLayout>
 </LinearLayout>

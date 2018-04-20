@@ -13,9 +13,11 @@
         android:padding="@dimen/loan_default_padding">
 
         <ImageView
+            android:id="@+id/iv_no_card_cashout_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:padding="@dimen/loan_default_padding_big"
             android:src="@drawable/close" />
 
         <TextView

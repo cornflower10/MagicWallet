@@ -97,6 +97,12 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
     }
 
     @Override
+    public void onError(String msg) {
+        super.onError(msg);
+        showToast(msg);
+    }
+
+    @Override
     public Loader onCreateLoader(int id, Bundle args) {
         return new PresenterLoder(mContext, new PresenterFactory() {
             @Override
@@ -110,6 +116,7 @@ public class NocardCashoutActivity extends BaseMvpActivity<NocardCashoutPresente
     public void onLoadFinished(Loader<NocardCashoutPresenter> loader, NocardCashoutPresenter data) {
         super.onLoadFinished(loader, data);
         presenter.loadCreditCard();
+        presenter.loadDebitCard();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.qingmang.bank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -12,11 +13,8 @@ import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
-import com.qingmang.moudle.entity.Bank;
 import com.qingmang.moudle.entity.CreditCardInfo;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,10 +36,11 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
     ImageView ivCardBg;
     @BindView(R.id.ll_root)
     LinearLayout llRoot;
+    private CreditCardInfo creditCardInfo;
 
     @Override
     public String setTitleName() {
-        return null;
+        return "信用卡详情";
     }
 
     @Override
@@ -60,11 +59,41 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
         loadViewHelper.restore();
         ImageLoaderUtil.getInstance().showImage(creditCardInfo.getLogo(),ivCardBg,0);
         tvName.setText(creditCardInfo.getBankName());
+        tvCoinType.setText(coinType(creditCardInfo.getCurrency()));
+        tvType.setText(levelType(creditCardInfo.getLevel()));
+        tvCardType.setText(creditCardInfo.getAnnualFee());
+        tvDes.setText(creditCardInfo.getIntroduct());
+        this.creditCardInfo = creditCardInfo;
 
     }
 
+    private String  coinType(String code){
+        if("rmb".equals(code)){
+            return "人民币";
+        }
+       else if("dollar".equals(code)){
+            return "外汇";
+        }
+        else if("rmbdollar".equals(code)){
+            return "人民币+外汇";
+        }
+        return "";
+    }
+
+    private String  levelType(String code){
+        if("ordinary".equals(code)){
+            return "普通卡";
+        }
+        else if("silver".equals(code)){
+            return "白金卡";
+        }
+        else if("golden".equals(code)){
+            return "金卡";
+        }
+        return "";
+    }
     @Override
-    public void onApplySuccess(List<Bank> banks) {
+    public void onApplySuccess(String banks) {
 
     }
 
@@ -93,5 +122,8 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
 
     @OnClick(R.id.bt_sure)
     public void onViewClicked() {
+        Intent intent = new Intent(mContext,CreditCardInfoNextActivity.class);
+        intent.putExtra("creditCardInfo",creditCardInfo);
+        startActivity(intent);
     }
 }

@@ -13,7 +13,7 @@ public interface ImageLoader {
 
     void loadLocalCircleImage(String url, ImageView imageView, int defaultImage);
     void loadLocalCircleImage(File file, ImageView imageView, int defaultImage);
-
+    void loadLocalImage(File file, ImageView imageView, int defaultImage);
     void loadCircleImage(String url, ImageView imageView, int defaultImage);
 
     void loadVideo(String url, ImageView imageView, int defaultImage);

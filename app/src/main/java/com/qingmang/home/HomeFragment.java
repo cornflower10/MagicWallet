@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qingmang.R;
 import com.qingmang.adapter.HotCreditCardAdapter;
-import com.qingmang.bank.HotBankInfoActivity;
+import com.qingmang.bank.CreditCardInfoActivity;
 import com.qingmang.base.BaseMvpFragment;
 import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.loan.LoanAdapter;
@@ -150,7 +150,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter, HomeView> imple
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), HotBankInfoActivity.class);
+                intent.setClass(getActivity(), CreditCardInfoActivity.class);
                 intent.putExtra("id", creditCards.get(position).getId());
                 startActivity(intent);
             }

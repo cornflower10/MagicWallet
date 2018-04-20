@@ -36,4 +36,24 @@ public class CreditCardInfoPresenter extends BaseMvpPresenter<CreditCardInfoView
     }
 
 
+    public void applayCreditCard(int id){
+        addSubscribe(App.getInstance()
+                .getRetrofitServiceManager()
+                .create(ApiService.class)
+                .ApplyCreidtCard(id)
+                .compose(ResponseTransformer.<String>handleResult())
+                .compose(RxSchedulers.<String>ObToMain())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        getMvpView().onApplySuccess(s);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().onError(throwable.getMessage());
+                    }
+                }));
+    }
+
 }

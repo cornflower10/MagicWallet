@@ -37,6 +37,9 @@ public class ImageLoaderUtil implements ImageLoader {
 
     @Override
     public void showImage(String url, ImageView imageView, int defaultImage) {
+         if(null==url){
+             url="";
+         }
         imageLoader.showImage(url,imageView,defaultImage);
     }
 
@@ -55,6 +58,10 @@ public class ImageLoaderUtil implements ImageLoader {
         imageLoader.loadLocalCircleImage(file,imageView,defaultImage);
     }
 
+    @Override
+    public void loadLocalImage(File file, ImageView imageView, int defaultImage) {
+        imageLoader.loadLocalImage(file,imageView,defaultImage);
+    }
     @Override
     public void loadCircleImage(String url, ImageView imageView, int defaultImage) {
         imageLoader.loadCircleImage(url,imageView,defaultImage);

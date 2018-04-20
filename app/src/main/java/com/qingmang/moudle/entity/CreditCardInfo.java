@@ -1,10 +1,13 @@
 package com.qingmang.moudle.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by xiejingbao on 2018/4/16.
  */
 
-public class CreditCardInfo {
+public class CreditCardInfo implements Parcelable{
 
     /**
      * id : 1
@@ -309,4 +312,92 @@ public class CreditCardInfo {
     public void setNumber(int number) {
         this.number = number;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeLong(this.createTime);
+        dest.writeLong(this.modifyTime);
+        dest.writeInt(this.version);
+        dest.writeInt(this.bankId);
+        dest.writeString(this.bankName);
+        dest.writeString(this.name);
+        dest.writeString(this.logo);
+        dest.writeString(this.introduct);
+        dest.writeString(this.level);
+        dest.writeString(this.currency);
+        dest.writeString(this.tags);
+        dest.writeString(this.organization);
+        dest.writeString(this.freePeriod);
+        dest.writeString(this.specification);
+        dest.writeString(this.qualification);
+        dest.writeString(this.annualFee);
+        dest.writeString(this.proportion);
+        dest.writeString(this.withdrawal);
+        dest.writeString(this.repayment);
+        dest.writeString(this.userCond);
+        dest.writeString(this.amount);
+        dest.writeInt(this.amountLevel);
+        dest.writeString(this.batch);
+        dest.writeInt(this.batchLevel);
+        dest.writeString(this.difficult);
+        dest.writeInt(this.difficultLevel);
+        dest.writeString(this.link);
+        dest.writeString(this.state);
+        dest.writeInt(this.number);
+    }
+
+    public CreditCardInfo() {
+    }
+
+    protected CreditCardInfo(Parcel in) {
+        this.id = in.readInt();
+        this.createTime = in.readLong();
+        this.modifyTime = in.readLong();
+        this.version = in.readInt();
+        this.bankId = in.readInt();
+        this.bankName = in.readString();
+        this.name = in.readString();
+        this.logo = in.readString();
+        this.introduct = in.readString();
+        this.level = in.readString();
+        this.currency = in.readString();
+        this.tags = in.readString();
+        this.organization = in.readString();
+        this.freePeriod = in.readString();
+        this.specification = in.readString();
+        this.qualification = in.readString();
+        this.annualFee = in.readString();
+        this.proportion = in.readString();
+        this.withdrawal = in.readString();
+        this.repayment = in.readString();
+        this.userCond = in.readString();
+        this.amount = in.readString();
+        this.amountLevel = in.readInt();
+        this.batch = in.readString();
+        this.batchLevel = in.readInt();
+        this.difficult = in.readString();
+        this.difficultLevel = in.readInt();
+        this.link = in.readString();
+        this.state = in.readString();
+        this.number = in.readInt();
+    }
+
+    public static final Creator<CreditCardInfo> CREATOR = new Creator<CreditCardInfo>() {
+        @Override
+        public CreditCardInfo createFromParcel(Parcel source) {
+            return new CreditCardInfo(source);
+        }
+
+        @Override
+        public CreditCardInfo[] newArray(int size) {
+            return new CreditCardInfo[size];
+        }
+    };
 }

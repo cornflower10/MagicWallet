@@ -2,10 +2,12 @@ package com.qlzgzg.network;
 
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.qingmang.baselibrary.utils.LogManager;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -50,6 +52,14 @@ public class RetrofitServiceManager {
 
     private OkHttpClient.Builder getBuild(){
         // 创建 OKHttpClient
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                LogManager.i(message);
+            }
+        });
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS);//连接超时时间
         builder.writeTimeout(DEFAULT_READ_TIME_OUT,TimeUnit.SECONDS);//写操作 超时时间
@@ -57,8 +67,9 @@ public class RetrofitServiceManager {
 //        builder.cookieJar(new JavaNetCookieJar(new CookieManager(new PersistentCookieStoreS(context), CookiePolicy.ACCEPT_ALL)));
         // 添加公共参数拦截器,请求头
         builder.addInterceptor(new BaseHttpHeaderInterceptor());
+        builder.addInterceptor(logging);
 //
-     return   builder.addInterceptor(new LogIntercepter());//请求日志
+     return  builder;//请求日志
 
     }
 
