@@ -90,4 +90,5 @@ dependencies {
     compile 'com.flipboard:bottomsheet-core:1.5.3'
     compile 'com.flipboard:bottomsheet-commons:1.5.3'
     compile project(':citypickerview')
+    compile project(':pickerview')
 }

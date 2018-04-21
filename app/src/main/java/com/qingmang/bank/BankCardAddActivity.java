@@ -1,15 +1,25 @@
 package com.qingmang.bank;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectChangeListener;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.CommonView;
@@ -20,7 +30,9 @@ import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,6 +68,7 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
     private File ff;
     private static final int RES_Z = 123;
     private static final int RES_F = 124;
+    private TimePickerView timePickerView;
 
 
     @Override
@@ -76,7 +89,7 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
     @Override
     public void onLoadFinished(Loader<BankCardAddPresenter> loader, BankCardAddPresenter data) {
         super.onLoadFinished(loader, data);
-        tvDate.setText("1120");
+        initTimePicker();
     }
 
     @Override
@@ -101,6 +114,7 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_date:
+                timePickerView.show(tvDate);
                 break;
             case R.id.iv_z:
                 ChooseImages(RES_Z);
@@ -223,5 +237,52 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
                     }
                 });
     }
+
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("MM/yy");
+        return format.format(date);
+    }
+
+    private void initTimePicker() {//Dialog 模式下，在底部弹出
+
+        timePickerView = new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+//                Toast.makeText(mContext, getTime(date), Toast.LENGTH_SHORT).show();
+                tvDate.setText(getTime(date));
+
+            }
+        })
+                .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
+                    @Override
+                    public void onTimeSelectChanged(Date date) {
+                        Log.i("pvTime", "onTimeSelectChanged");
+                    }
+                })
+                .setType(new boolean[]{true, true, false, false, false, false})
+                .isDialog(true)
+                .build();
+
+        Dialog mDialog = timePickerView.getDialog();
+        if (mDialog != null) {
+
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM);
+
+            params.leftMargin = 0;
+            params.rightMargin = 0;
+            timePickerView.getDialogContainerLayout().setLayoutParams(params);
+
+            Window dialogWindow = mDialog.getWindow();
+            if (dialogWindow != null) {
+                dialogWindow.setWindowAnimations(com.bigkoo.pickerview.R.style.picker_view_slide_anim);//修改动画样式
+                dialogWindow.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
+            }
+        }
+    }
+
 
 }
