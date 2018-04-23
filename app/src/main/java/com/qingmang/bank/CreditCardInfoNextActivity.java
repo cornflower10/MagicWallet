@@ -2,17 +2,24 @@ package com.qingmang.bank;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.qingmang.App;
 import com.qingmang.R;
+import com.qingmang.adapter.CheckBoxAdapter;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.customview.LevelView;
 import com.qingmang.moudle.entity.CreditCardInfo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,7 +60,12 @@ public class CreditCardInfoNextActivity extends BaseMvpActivity<CreditCardInfoPr
     LevelView lvYd;
     @BindView(R.id.tv_yd)
     TextView tvYd;
+    @BindView(R.id.rv)
+    RecyclerView rv;
     private CreditCardInfo creditCardInfo;
+
+    private CheckBoxAdapter checkBoxAdapter;
+    private List<String> list = new ArrayList<>();
 
     @Override
     public String setTitleName() {
@@ -127,6 +139,12 @@ public class CreditCardInfoNextActivity extends BaseMvpActivity<CreditCardInfoPr
         lvGl.setLevel(creditCardInfo.getBatchLevel());
         lvYd.setLevel(creditCardInfo.getDifficultLevel());
         tvYd.setText(creditCardInfo.getDifficult());
+        String str = creditCardInfo.getQualification();
+        String [] s = str.split(",");
+        list.addAll(Arrays.asList(s));
+        checkBoxAdapter = new CheckBoxAdapter(list);
+        rv.setLayoutManager(new GridLayoutManager(mContext,2));
+        rv.setAdapter(checkBoxAdapter);
     }
 
     @Override
@@ -150,5 +168,6 @@ public class CreditCardInfoNextActivity extends BaseMvpActivity<CreditCardInfoPr
         startProgressDialog();
         presenter.applayCreditCard(creditCardInfo.getId());
     }
+
 
 }
