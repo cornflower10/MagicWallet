@@ -1,6 +1,8 @@
 package com.qlzgzg.network;
 
 
+import android.content.Context;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.qingmang.baselibrary.utils.LogManager;
 
@@ -20,19 +22,21 @@ public class RetrofitServiceManager {
     private Retrofit mRetrofit;
 
     private static RetrofitServiceManager instance;
+    private Context context;
 
-    private RetrofitServiceManager(String baseUrl){
+    private RetrofitServiceManager(String baseUrl,Context context){
+        this.context =context;
         // 创建 OKHttpClient
         OkHttpClient.Builder builder = getBuild();
         // 创建Retrofit
         mRetrofit= getmRetrofit(baseUrl,builder);
     }
 
-    public static synchronized RetrofitServiceManager getInstance(String baseUrl) {
+    public static synchronized RetrofitServiceManager getInstance(String baseUrl, Context context) {
         if(instance==null){
             synchronized (RetrofitServiceManager.class){
                 if(instance==null){
-                    instance = new RetrofitServiceManager(baseUrl);
+                    instance = new RetrofitServiceManager(baseUrl,context);
                 }
             }
         }
@@ -66,7 +70,7 @@ public class RetrofitServiceManager {
         builder.readTimeout(DEFAULT_READ_TIME_OUT,TimeUnit.SECONDS);//读操作超时时间
 //        builder.cookieJar(new JavaNetCookieJar(new CookieManager(new PersistentCookieStoreS(context), CookiePolicy.ACCEPT_ALL)));
         // 添加公共参数拦截器,请求头
-        builder.addInterceptor(new BaseHttpHeaderInterceptor());
+        builder.addInterceptor(new BaseHttpHeaderInterceptor(context));
         builder.addInterceptor(logging);
 //
      return  builder;//请求日志

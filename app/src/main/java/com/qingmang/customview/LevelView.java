@@ -32,9 +32,9 @@ public class LevelView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LevelView);
 
-        count = typedArray.getInt(R.styleable.LevelView_leavelCount,5);
-        resDrawable = typedArray.getResourceId(R.styleable.LevelView_image,R.drawable.ic_mood_red_24dp);
-        defultRes = typedArray.getResourceId(R.styleable.LevelView_image_choose,R.drawable.ic_mood_black_24dp);
+        count = typedArray.getInteger(R.styleable.LevelView_leavelCount,5);
+        resDrawable = typedArray.getResourceId(R.styleable.LevelView_image_choose,R.drawable.ic_mood_red_24dp);
+        defultRes = typedArray.getResourceId(R.styleable.LevelView_image,R.drawable.ic_mood_black_24dp);
        int margin = SizeUtils.dp2px(4,context);
         setOrientation(HORIZONTAL);
         for (int i = 0; i < count; i++) {
@@ -45,7 +45,7 @@ public class LevelView extends LinearLayout {
             imageView.setBackgroundResource(defultRes);
             addView(imageView);
         }
-
+        typedArray.recycle();
 
     }
 

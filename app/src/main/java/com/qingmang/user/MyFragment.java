@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.qingmang.App;
 import com.qingmang.R;
 import com.qingmang.bank.BankCardListActivity;
 import com.qingmang.bank.DebitCardListActivity;
@@ -94,10 +95,18 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                         startActivity(intent);
                         break;
                     case 3:
+                        if(App.getInstance().isLogin())
                         startActivity(DebitCardListActivity.class);
+                        else {
+                            startActivity(LoginActivity.class);
+                        }
                         break;
                     case 4:
+                        if(App.getInstance().isLogin())
                         startActivity(BankCardListActivity.class);
+                        else {
+                            startActivity(LoginActivity.class);
+                        }
                         break;
                 }
             }
@@ -154,18 +163,28 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
 //        }
         switch (view.getId()) {
             case R.id.iv_setting:
-                Intent intent = new Intent(mContext, SettingActivity.class);
-                intent.putExtra("customerInfo", customerInfo);
-                startActivity(intent);
+                if(App.getInstance().isLogin()){
+                    Intent intent = new Intent(mContext, SettingActivity.class);
+                    intent.putExtra("customerInfo", customerInfo);
+                    startActivity(intent);
+                }else {
+                    startActivity(LoginActivity.class);
+                }
+
                 break;
             case R.id.ll_rzqy:
-                startActivity(BankCardListActivity.class);
+                if(App.getInstance().isLogin())
+                    startActivity(BankCardListActivity.class);
+                else {
+                    startActivity(LoginActivity.class);
+                }
+
                 break;
             case R.id.rl_dzf:
 //                ((MainActivity) mContext).chooseTab(3);
                 break;
             case R.id.rl_yhj:
-                startActivity(BankCardListActivity.class);
+//                startActivity(BankCardListActivity.class);
                 break;
         }
 

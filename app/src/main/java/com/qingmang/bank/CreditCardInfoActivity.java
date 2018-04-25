@@ -8,12 +8,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qingmang.App;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.moudle.entity.CreditCardInfo;
+import com.qingmang.user.LoginActivity;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import butterknife.BindView;
@@ -122,8 +124,13 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
 
     @OnClick(R.id.bt_sure)
     public void onViewClicked() {
-        Intent intent = new Intent(mContext,CreditCardInfoNextActivity.class);
-        intent.putExtra("creditCardInfo",creditCardInfo);
-        startActivity(intent);
+        if(App.getInstance().isLogin()){
+            Intent intent = new Intent(mContext,CreditCardInfoNextActivity.class);
+            intent.putExtra("creditCardInfo",creditCardInfo);
+            startActivity(intent);
+        }else {
+            startActivity(LoginActivity.class);
+        }
+
     }
 }

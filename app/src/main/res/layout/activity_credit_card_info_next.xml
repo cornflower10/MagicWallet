@@ -341,8 +341,12 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tv2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
                         app:leavelCount="5"
+                        app:image = "@drawable/icon_card_quota"
+                        app:image_choose = "@drawable/icon_card_quota_cur"
+                        >
+
                     </com.qingmang.customview.LevelView>
 
                 </RelativeLayout>
@@ -380,8 +384,11 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tv3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
                         app:leavelCount="5"
+                        app:image = "@drawable/icon_card_proba"
+                        app:image_choose = "@drawable/icon_card_proba_cur"
+                        >
                     </com.qingmang.customview.LevelView>
 
                 </RelativeLayout>
@@ -419,8 +426,11 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/tv4"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
                         app:leavelCount="5"
+                        app:image="@drawable/icon_card_easy"
+                        app:image_choose = "@drawable/icon_card_easy_cur"
+                        >
                     </com.qingmang.customview.LevelView>
 
                 </RelativeLayout>

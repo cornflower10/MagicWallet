@@ -73,7 +73,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         singleton = this;
-        retrofitServiceManager  = RetrofitServiceManager.getInstance(BuildConfig.URL);
+        retrofitServiceManager  = RetrofitServiceManager.getInstance(BuildConfig.URL,this);
         foregroundCallbacks = ForegroundCallbacks.init(this);
 
 //        /**
