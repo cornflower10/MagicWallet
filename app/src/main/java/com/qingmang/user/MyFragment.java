@@ -169,6 +169,9 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
         switch (view.getId()) {
             case R.id.iv_setting:
                 if(App.getInstance().isLogin()){
+                    if(null==customerInfo){
+                        return;
+                    }
                     Intent intent = new Intent(mContext, SettingActivity.class);
                     intent.putExtra("customerInfo", customerInfo);
                     startActivity(intent);

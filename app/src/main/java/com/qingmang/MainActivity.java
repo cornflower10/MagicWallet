@@ -15,6 +15,7 @@ import com.qingmang.home.HomeFragment;
 import com.qingmang.loan.LoanFragment;
 import com.qingmang.uilibrary.BottomBar;
 import com.qingmang.uilibrary.BottomBarTab;
+import com.qingmang.user.LoginActivity;
 import com.qingmang.user.MyFragment;
 
 import java.util.ArrayList;
@@ -82,11 +83,17 @@ public class MainActivity extends BaseActivity {
                         showHideFragment(findFragment);
                         break;
                     case 3:
-                        if (null == myFragment) {
-                            myFragment = MyFragment.newInstance();
-                            transaction.add(R.id.fl_container, myFragment);
+                        if(App.getInstance().isLogin()){
+                            if (null == myFragment) {
+                                myFragment = MyFragment.newInstance();
+                                transaction.add(R.id.fl_container, myFragment);
+                            }
+                            showHideFragment(myFragment);
+                        }else {
+                            startActivity(LoginActivity.class);
+                            mBottomBar.setCurrentItem(0);
                         }
-                        showHideFragment(myFragment);
+
                         break;
 
                 }
