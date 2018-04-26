@@ -14,10 +14,10 @@ import io.reactivex.functions.Consumer;
 
 public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
 
-    public void sendSms(String phone,String idCard){
+    public void sendSms(String phone){
         addSubscribe(App.getInstance()
                 .getRetrofitServiceManager()
-                .create(ApiService.class).RegistSMS(phone,idCard)
+                .create(ApiService.class).RegistSMS(phone)
                 .compose(ResponseTransformer.<String>handleResult())
                 .compose(RxSchedulers.<String>ObToMain())
                 .subscribe(new Consumer<String>() {
@@ -34,7 +34,7 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
 
     }
 
-    public void register(String phone,String idCard,String code,String phoneModel,String pwd){
+    public void register(String phone,String code,String phoneModel,String pwd){
         addSubscribe(App.getInstance()
                 .getRetrofitServiceManager()
                 .create(ApiService.class).Regist(phone,code,phoneModel,pwd)
@@ -42,8 +42,8 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
                 .compose(RxSchedulers.<String>ObToMain())
                 .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(String sms) throws Exception {
-                        getMvpView().onRegister();
+                    public void accept(String str) throws Exception {
+                        getMvpView().onRegister(str);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -54,9 +54,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("regist/sms")
-    Observable<BaseEntity<String>> RegistSMS(@Field("phone") String phone,
-                                             @Field("idCard") String idCard
+    @POST("member/regist/sms")
+    Observable<BaseEntity<String>> RegistSMS(@Field("phone") String phone
     );
 
 

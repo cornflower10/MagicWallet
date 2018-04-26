@@ -49,7 +49,7 @@ public class ResponseTransformer {
 
         @Override
         public ObservableSource<T> apply(BaseEntity<T> tResponse) throws Exception {
-            if ("1".equals(tResponse.getStatus())) {
+            if ("1".equals(tResponse.getStatus())||"-98".equals(tResponse.getStatus())) {
                 return (ObservableSource<T>) Observable.just(null==tResponse.getData()?"":tResponse.getData());
             } else if ("-99".equals(tResponse.getStatus())){
                 return Observable.error(new ApiException("-99"));

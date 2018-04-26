@@ -59,7 +59,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter,LoginView> imp
                 presenter.login(etPhone.getText().toString(),etPasswd.getText().toString());
                 break;
             case R.id.tv_forget_passwd:
-//                startActivity(ForgetPasswdActivity.class);
+                startActivity(ForgetPasswdActivity.class);
                 break;
             case R.id.tv_register:
                 startActivity(RegisterActivity.class);

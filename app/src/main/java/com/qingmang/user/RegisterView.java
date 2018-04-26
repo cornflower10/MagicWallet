@@ -8,5 +8,5 @@ import com.qingmang.base.BaseView;
 
 public interface RegisterView<D> extends BaseView {
     void onDataSuccess(D d);
-    void onRegister();
+    void onRegister(String str);
 }

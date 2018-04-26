@@ -117,7 +117,12 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.loadData();
+        if(App.getInstance().isLogin()){
+            mPresenter.loadData();
+        }else {
+            startActivity(LoginActivity.class);
+        }
+
     }
 
     public static MyFragment newInstance() {
@@ -136,7 +141,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
 
     @Override
     public void onError(String msg) {
-//        showToast(msg);
+       jumpLoign(msg);
     }
 
     @Override

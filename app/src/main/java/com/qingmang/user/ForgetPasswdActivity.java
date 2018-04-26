@@ -90,7 +90,7 @@ public class ForgetPasswdActivity extends BaseMvpActivity<ForgetPasswdPresenter,
             return;
         }
         if(!ValUtils.isPassword(etPasswd.getText().toString())){
-            showToast("密码不正确！");
+            showToast("密码格式不正确！");
             return;
         }
         startProgressDialog();

@@ -1,16 +1,19 @@
 package com.qingmang.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.qingmang.MainActivity;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
+import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.baselibrary.utils.ValUtils;
 import com.qingmang.customview.CheckCodeCountDown;
 
@@ -55,9 +58,12 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter, Registe
     }
 
     @Override
-    public void onRegister() {
+    public void onRegister(String str) {
         stopProgressDialog();
-        startActivity(LoginActivity.class);
+        SharedPreferences sharedPreferences = getSharedPreferences("token",MODE_PRIVATE);
+        sharedPreferences.edit().putString("token",str).commit();
+        LogManager.i("token:"+str);
+        startActivity(MainActivity.class);
     }
 
     @Override
@@ -101,10 +107,10 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter, Registe
                     return;
                 }
                 startProgressDialog();
-//                presenter.register(etName.getText().toString(),
-//                        etPhone.getText().toString(),
-//                        etPasswd.getText().toString(),
-//                        etVal.getText().toString());
+                presenter.register(
+                        etPhone.getText().toString(),etVal.getText().toString(),
+                        null,etPasswd.getText().toString()
+                        );
 
                 break;
         }
@@ -129,7 +135,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter, Registe
             public void sendCheckCode() {
 //                TODO 向手机发送验证码的逻辑
                 startProgressDialog();
-//                presenter.sendSms(etPhone.getText().toString());
+                presenter.sendSms(etPhone.getText().toString());
             }
         });
         cdVal.setOnFinishListener(new CheckCodeCountDown.OnFinishListener() {
