@@ -14,12 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qingmang.App;
 import com.qingmang.R;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
 import com.qingmang.base.PresenterLoder;
 import com.qingmang.loan.entity.LoanDetailEntity;
+import com.qingmang.user.LoginActivity;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import java.math.BigDecimal;
@@ -99,15 +101,20 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
 
     @OnClick(R.id.tv_loan_detail_apply_lending)
     void tvLoanDetailApplyLendingOnclick() {
-        if (TextUtils.isEmpty(etLoanDetailRepaymentValue.getText().toString().trim())) {
-            showToast("请输入贷款额度");
-        } else if (TextUtils.isEmpty(etLoanDetailLendingMonth.getText().toString().trim())) {
-            showToast("请输入还款期限");
+        if (App.getInstance().isLogin()) {
+            if (TextUtils.isEmpty(etLoanDetailRepaymentValue.getText().toString().trim())) {
+                showToast("请输入贷款额度");
+            } else if (TextUtils.isEmpty(etLoanDetailLendingMonth.getText().toString().trim())) {
+                showToast("请输入还款期限");
+            } else {
+                presenter.apply(getIntent().getIntExtra("ID", 0),
+                        Double.parseDouble(etLoanDetailRepaymentValue.getText().toString().trim()),
+                        Integer.parseInt(etLoanDetailLendingMonth.getText().toString().trim()));
+            }
         } else {
-            presenter.apply(getIntent().getIntExtra("ID", 0),
-                    Double.parseDouble(etLoanDetailRepaymentValue.getText().toString().trim()),
-                    Integer.parseInt(etLoanDetailLendingMonth.getText().toString().trim()));
+            startActivity(LoginActivity.class);
         }
+
     }
 
     private LoanDetailCondsAdapter loanDetailCondsAdapter;
