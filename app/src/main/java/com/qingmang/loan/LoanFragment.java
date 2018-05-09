@@ -68,7 +68,6 @@ public class LoanFragment extends BaseMvpFragment<LoanPresenter, LoanView> imple
         tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_default_sorting));
         tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_lowest_rate));
         tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_highest_quota));
-        tbLoan.addTab(tbLoan.newTab().setText(R.string.loan_filter));
 
         tbLoan.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
