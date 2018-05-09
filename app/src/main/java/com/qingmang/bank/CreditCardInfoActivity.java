@@ -60,10 +60,10 @@ public class CreditCardInfoActivity extends BaseMvpActivity<CreditCardInfoPresen
     public void onDataSuccess(CreditCardInfo creditCardInfo) {
         loadViewHelper.restore();
         ImageLoaderUtil.getInstance().showImage(creditCardInfo.getLogo(),ivCardBg,0);
-        tvName.setText(creditCardInfo.getBankName());
+        tvName.setText(creditCardInfo.getName());
         tvCoinType.setText(coinType(creditCardInfo.getCurrency()));
         tvType.setText(levelType(creditCardInfo.getLevel()));
-        tvCardType.setText(creditCardInfo.getAnnualFee());
+        tvCardType.setText(creditCardInfo.getTags());
         tvDes.setText(creditCardInfo.getIntroduct());
         this.creditCardInfo = creditCardInfo;
 

@@ -86,8 +86,10 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (position) {
                     case 0:
+                        showToast("该功能暂未投入使用！");
                         break;
                     case 1:
+                        showToast("该功能暂未投入使用！");
                         break;
                     case 2:
                         Intent intent = new Intent();
@@ -108,6 +110,19 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                             startActivity(LoginActivity.class);
                         }
                         break;
+                    case 5:
+                        showToast("该功能暂未投入使用！");
+                        break;
+                    case 6:
+                        showToast("该功能暂未投入使用！");
+                        break;
+                    case 7:
+                        showToast("该功能暂未投入使用！");
+                        break;
+//                    case 8:
+//                        showToast("该功能暂未投入使用！");
+//                        break;
+
                 }
             }
         });
