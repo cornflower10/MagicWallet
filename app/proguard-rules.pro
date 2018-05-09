@@ -33,6 +33,10 @@
 #---------------------------------1.实体类---------------------------------
 
 -keep class com.qingmang.moudle.entity.** { *; }
+-keep class com.qingmang.loan.entity.** { *; }
+
+-dontwarn com.contrarywind.**
+-keep class com.contrarywind.** { *;}
 
 
 #忽略警告
