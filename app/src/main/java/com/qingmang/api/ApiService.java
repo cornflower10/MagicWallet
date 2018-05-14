@@ -7,7 +7,9 @@ import com.qingmang.moudle.entity.BankInfo;
 import com.qingmang.moudle.entity.BaseEntity;
 import com.qingmang.moudle.entity.CreditCard;
 import com.qingmang.moudle.entity.CreditCardInfo;
+import com.qingmang.moudle.entity.CreditCardOrder;
 import com.qingmang.moudle.entity.CustomerInfo;
+import com.qingmang.moudle.entity.Loan;
 
 import java.util.List;
 import java.util.Map;
@@ -182,6 +184,50 @@ public interface ApiService {
                                                 @Part("repayDate") RequestBody repayDate,
                                                 @Part MultipartBody.Part file
     );
+
+
+    /**
+     * 贷款订单查询
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/order/list")
+    Observable<BaseEntity<Loan>> LoanOrderList(@Field("pageNumber") int pageNumber
+            ,@Field("pageSize") int pageSize);
+
+
+    /**
+     * 删除贷款订单
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/order/delete")
+    Observable<BaseEntity<String>> DeleteLoanOrder(@Field("id") long id);
+
+
+
+
+    /**
+     * 信用卡订单查询
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/card/list")
+    Observable<BaseEntity<CreditCardOrder>> CreditCardOrderList(@Field("pageNumber") int pageNumber
+            , @Field("pageSize") int pageSize);
+
+
+    /**
+     * 删除贷款订单
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("member/card/delete")
+    Observable<BaseEntity<String>> DeleteCreditCardOrder(@Field("id") long id);
 
 
 }

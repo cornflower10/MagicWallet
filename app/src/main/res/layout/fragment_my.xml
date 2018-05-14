@@ -139,15 +139,40 @@
        android:layout_height="wrap_content" />
   </RelativeLayout>
  </LinearLayout>
+  <RelativeLayout
+      android:layout_marginTop="10dp"
+      android:id="@+id/ll_yq"
+      android:background="@color/white"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+   <TextView
+       android:layout_centerVertical="true"
+       android:text="邀请好友"
+       android:drawablePadding="@dimen/margin_16"
+       android:drawableLeft="@drawable/icon_my_yqhy"
+       android:layout_margin="@dimen/margin_16"
+       android:textSize="@dimen/sp_16"
+       android:textColor="@color/text_333333"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+   <ImageView
+       android:layout_marginRight="@dimen/margin_16"
+       android:layout_centerVertical="true"
+       android:layout_alignParentRight="true"
+       android:src="@drawable/icon_more"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+  </RelativeLayout>
+  <View
+      style="@style/divide_line_match"/>
  <RelativeLayout
      android:id="@+id/ll_rzqy"
-     android:layout_marginTop="10dp"
      android:background="@color/white"
      android:layout_width="match_parent"
      android:layout_height="wrap_content">
   <TextView
       android:layout_centerVertical="true"
-      android:text="最近申请记录"
+      android:text="申请贷款记录"
       android:drawablePadding="@dimen/margin_16"
       android:drawableLeft="@drawable/icon_my_sqjl"
       android:layout_margin="@dimen/margin_16"
@@ -172,7 +197,7 @@
       android:layout_height="wrap_content">
    <TextView
        android:layout_centerVertical="true"
-       android:text="赚零花钱"
+       android:text="申请套现记录"
        android:drawablePadding="@dimen/margin_16"
        android:drawableLeft="@drawable/icon_my_lhq"
        android:layout_margin="@dimen/margin_16"
@@ -190,29 +215,6 @@
   </RelativeLayout>
   <View
       style="@style/divide_line_match"/>
-  <RelativeLayout
-      android:id="@+id/ll_yq"
-      android:background="@color/white"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-   <TextView
-       android:layout_centerVertical="true"
-       android:text="邀请好友"
-       android:drawablePadding="@dimen/margin_16"
-       android:drawableLeft="@drawable/icon_my_yqhy"
-       android:layout_margin="@dimen/margin_16"
-       android:textSize="@dimen/sp_16"
-       android:textColor="@color/text_333333"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
-   <ImageView
-       android:layout_marginRight="@dimen/margin_16"
-       android:layout_centerVertical="true"
-       android:layout_alignParentRight="true"
-       android:src="@drawable/icon_more"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
-  </RelativeLayout>
 
  <RelativeLayout
      android:background="@color/white"
