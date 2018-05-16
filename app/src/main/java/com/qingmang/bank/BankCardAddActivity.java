@@ -1,6 +1,7 @@
 package com.qingmang.bank;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +45,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.utils.ImageCaptureManager;
 import top.zibin.luban.Luban;
 
 public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, CommonView> implements CommonView<String> {
@@ -69,6 +72,8 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
     private static final int RES_Z = 123;
     private static final int RES_F = 124;
     private TimePickerView timePickerView;
+
+    private   ImageCaptureManager captureManager;
 
 
     @Override
@@ -117,10 +122,12 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
                 timePickerView.show(tvDate);
                 break;
             case R.id.iv_z:
-                ChooseImages(RES_Z);
+//                ChooseImages(RES_Z);
+                openCamera(RES_Z);
                 break;
             case R.id.iv_f:
-                ChooseImages(RES_F);
+//                ChooseImages(RES_F);
+                openCamera(RES_F);
                 break;
             case R.id.bt_sure:
                 if (TextUtils.isEmpty(etName.getText().toString())) {
@@ -183,19 +190,39 @@ public class BankCardAddActivity extends BaseMvpActivity<BankCardAddPresenter, C
                 .start(BankCardAddActivity.this, resCode);
     }
 
+    private void openCamera(int resCode) {
+        captureManager = new ImageCaptureManager(mContext);
+        try {
+            Intent intent = captureManager.dispatchTakePictureIntent();
+            startActivityForResult(intent, resCode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ActivityNotFoundException e) {
+            Log.e("PhotoPickerFragment", "No Activity Found to handle Intent", e);
+        }
+    }
+
+
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+            String imageUrl = captureManager.getCurrentPhotoPath();
             if (requestCode == RES_Z) {
-                ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-                String imageUrl = photos.get(0);
+//                ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
                 compressWithRx(imageUrl, true);
             } else if (requestCode == RES_F) {
-                ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-                String imageUrl = photos.get(0);
+//                ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+//                String imageUrl = captureManager.getCurrentPhotoPath();
                 compressWithRx(imageUrl, false);
             }
+
 
         }
 

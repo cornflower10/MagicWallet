@@ -94,14 +94,14 @@ public class Loan {
         private String idCard;
         private int platId;
         private String platName;
-        private int apply;
+        private double apply;
         private int term;
         private String ip;
         private String province;
         private String city;
         private String phone;
         private String phoneModel;
-        private int finalAmount;
+        private double finalAmount;
         private String state;
         private String orderno;
 
@@ -177,11 +177,11 @@ public class Loan {
             this.platName = platName;
         }
 
-        public int getApply() {
+        public double getApply() {
             return apply;
         }
 
-        public void setApply(int apply) {
+        public void setApply(double apply) {
             this.apply = apply;
         }
 
@@ -233,11 +233,11 @@ public class Loan {
             this.phoneModel = phoneModel;
         }
 
-        public int getFinalAmount() {
+        public double getFinalAmount() {
             return finalAmount;
         }
 
-        public void setFinalAmount(int finalAmount) {
+        public void setFinalAmount(double finalAmount) {
             this.finalAmount = finalAmount;
         }
 

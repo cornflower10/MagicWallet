@@ -20,4 +20,10 @@ public class DateUtils {
         return sdf.format(date);
     }
 
+    public static String transferLongToDateHM(Long millSec){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date= new Date(millSec);
+        return sdf.format(date);
+    }
+
 }

@@ -191,6 +191,7 @@
   <View
      style="@style/divide_line_match"/>
   <RelativeLayout
+      android:visibility="gone"
       android:id="@+id/ll_zq"
       android:background="@color/white"
       android:layout_width="match_parent"

@@ -17,7 +17,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.1.1"
-        buildConfigField 'String','BANK_LOGO','"http://livehaiyunx.oss-cn-shanghai.aliyuncs.com/picture/loan/bank/"'
+        buildConfigField 'String', 'BANK_LOGO', '"http://livehaiyunx.oss-cn-shanghai.aliyuncs.com/picture/loan/bank/"'
         buildConfigField 'String', 'URL', '"http://47.74.133.184/SERVER_PROJECT"'
         buildConfigField 'String', 'WHITELIST', '"release"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

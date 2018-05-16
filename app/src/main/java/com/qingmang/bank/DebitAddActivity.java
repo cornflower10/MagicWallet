@@ -1,12 +1,14 @@
 package com.qingmang.bank;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +25,11 @@ import com.qingmang.baselibrary.utils.LogManager;
 import com.qingmang.utils.imageload.ImageLoaderUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,6 +37,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.utils.ImageCaptureManager;
 import top.zibin.luban.Luban;
 
 /**
@@ -89,22 +92,22 @@ public class DebitAddActivity extends BaseMvpActivity<DebitAddPresenter, CommonV
 
     @OnClick(R.id.iv_debit_front)
     void ivDebitFrontOnclick() {
-        chooseImages(RES_F);
+        openCamera(RES_F);
     }
 
     @OnClick(R.id.iv_debit_back)
     void ivDebitBackOnclick() {
-        chooseImages(RES_B);
+        openCamera(RES_B);
     }
 
     @OnClick(R.id.iv_debit_front_c)
     void ivDebitFrontCOnclick() {
-        chooseImages(RES_FC);
+        openCamera(RES_FC);
     }
 
     @OnClick(R.id.iv_debit_front_cs)
     void ivDebitFrontCsOnclick() {
-        chooseImages(RES_FSC);
+        openCamera(RES_FSC);
     }
 
     @OnClick(R.id.bt_sure)
@@ -149,11 +152,24 @@ public class DebitAddActivity extends BaseMvpActivity<DebitAddPresenter, CommonV
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        // TODO: add setContentView(...) invocation
+//        ButterKnife.bind(this);
+//    }
+    ImageCaptureManager captureManager;
+
+    private void openCamera(int resCode) {
+        captureManager = new ImageCaptureManager(mContext);
+        try {
+            Intent intent = captureManager.dispatchTakePictureIntent();
+            startActivityForResult(intent, resCode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ActivityNotFoundException e) {
+            Log.e("PhotoPickerFragment", "No Activity Found to handle Intent", e);
+        }
     }
 
     private void chooseImages(int resCode) {
@@ -169,8 +185,9 @@ public class DebitAddActivity extends BaseMvpActivity<DebitAddPresenter, CommonV
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-            String imageUrl = photos.get(0);
+//            ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+//            String imageUrl = photos.get(0);
+            String imageUrl = captureManager.getCurrentPhotoPath();
             compressWithRx(imageUrl, requestCode);
         }
     }

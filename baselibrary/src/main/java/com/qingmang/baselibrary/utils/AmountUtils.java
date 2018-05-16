@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 public class AmountUtils {
 
     public static String amountFormat (double amount) {
-        if(amount<0){
+        if(amount<= 0){
             return "0.00";
         }
         return amountFormat (amount,"###,###.00");
