@@ -1,7 +1,6 @@
 package com.qingmang.loan;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import com.qingmang.App;
 import com.qingmang.R;
+import com.qingmang.WebActivity;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
 import com.qingmang.base.PresenterFactory;
@@ -98,6 +98,7 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
     TextView tvLoanDetailRepaymentValueRange;
     @BindView(R.id.tv_loan_detail_lending_month_range)
     TextView tvLoanDetailLendingMonthRange;
+    private int id;
 
     @OnClick(R.id.tv_loan_detail_apply_lending)
     void tvLoanDetailApplyLendingOnclick() {
@@ -166,6 +167,8 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
         lowTerm = loanDetailEntity.getTermLower();
         upTerm = loanDetailEntity.getTermUpper();
 
+        id = loanDetailEntity.getId();
+
         tvLoanDetailIntroduct.setText(loanDetailEntity.getIntroduct());
         tvLoanDetailRangeValue.setText(loanDetailEntity.getRateLower() + "");
 
@@ -176,13 +179,17 @@ public class LoanDetailActivity extends BaseMvpActivity<LoanDetailPresenter, Loa
 
     @Override
     public void applySuccess(String msg) {
-        showToast(msg);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finish();
-            }
-        }, 2 * 1000);
+
+//        https://sup.haiyunx.com/member/apply/plat/href?platId=贷款
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                finish();
+//            }
+//        }, 2 * 1000);
+        WebActivity.startWebViewActivity(mContext,"贷款","plat/href?platId="+msg);
+        finish();
+
     }
 
     private void initAdapter(LoanDetailEntity loanDetailEntity) {

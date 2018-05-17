@@ -67,6 +67,9 @@
             android:name=".bank.DebitAddActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".WelComeActivity"
             android:screenOrientation="portrait">
             <intent-filter>

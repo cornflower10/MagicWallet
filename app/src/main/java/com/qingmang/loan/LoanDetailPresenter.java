@@ -50,7 +50,7 @@ public class LoanDetailPresenter extends BaseMvpPresenter<LoanDetailView> {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        getMvpView().applySuccess("申请成功");
+                        getMvpView().applySuccess(s);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

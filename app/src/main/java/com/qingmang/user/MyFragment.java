@@ -175,7 +175,7 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
     }
 
 
-    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf, R.id.rl_yhj,R.id.ll_yq})
+    @OnClick({R.id.iv_setting, R.id.ll_rzqy, R.id.rl_dzf, R.id.rl_yhj,R.id.ll_yq,R.id.ll_tx})
     public void onViewClicked(View view) {
 //        if(!App.getInstance().isLogin()){
 //            startActivity(LoginActivity.class);
@@ -218,6 +218,10 @@ public class MyFragment extends BaseMvpFragment<MyPresenter, MyView> implements 
                 }
 
                 break;
+            case R.id.ll_tx:
+                showToast("该功能暂未投入使用！");
+                break;
+
         }
 
 

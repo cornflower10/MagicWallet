@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.qingmang.App;
 import com.qingmang.R;
+import com.qingmang.WebActivity;
 import com.qingmang.adapter.CheckBoxAdapter;
 import com.qingmang.base.BaseMvpActivity;
 import com.qingmang.base.Presenter;
@@ -114,8 +115,9 @@ public class CreditCardInfoNextActivity extends BaseMvpActivity<CreditCardInfoPr
     @Override
     public void onApplySuccess(String s) {
         stopProgressDialog();
-        showToast("申请成功！");
+//        showToast("申请成功！");
         App.getInstance().getForegroundCallbacks().finishActivity(CreditCardInfoActivity.class);
+        WebActivity.startWebViewActivity(mContext,"信用卡","card/href?cardId="+s);
         finish();
     }
 
@@ -167,6 +169,8 @@ public class CreditCardInfoNextActivity extends BaseMvpActivity<CreditCardInfoPr
     public void onViewClicked() {
         startProgressDialog();
         presenter.applayCreditCard(creditCardInfo.getId());
+//        WebActivity.startWebViewActivity(mContext,"信用卡","card/href?cardId="+creditCardInfo.getId());
+
     }
 
 

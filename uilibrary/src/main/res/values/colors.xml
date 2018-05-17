@@ -6,4 +6,15 @@
     <color name="tab_select">#292929</color>
     <color name="tab_unselect">#323232</color>
     <color name="page_bg_color">#F7F7F7</color>
+
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <!--<color name="tab_select">#292929</color>-->
+    <!--<color name="tab_unselect">#323232</color>-->
+    <!--<color name="page_bg_color">#F7F7F7</color>-->
+    <color name="bankcard_item_bg">#1a9ad4</color>
+    <color name="set_up_bg">#1e9ed8</color>
+    <color name="main_card_bg">#65bae3</color>
+    <color name="white">#ffffff</color>
 </resources>
