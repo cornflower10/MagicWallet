@@ -78,6 +78,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".user.CreditCardOrderListActivity" />
         <activity android:name=".user.InviteFriendsActivity"></activity>
     </application>
